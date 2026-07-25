@@ -1,0 +1,30 @@
+# === BACKEND (Spring Boot) ===
+backend/target/
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+backend/HELP.md
+backend/.apt_generated
+backend/.classpath
+backend/.factorypath
+backend/.project
+backend/.settings
+backend/.springBeans
+backend/.sts4-cache
+
+# === IDE CONFIGS (IntelliJ, VS Code, NetBeans) ===
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
