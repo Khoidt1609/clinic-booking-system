@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AppointmentRequest {
-    private Long patientId;
     private Long doctorId;
     private Long slotId;
     private LocalDate appointmentDate;

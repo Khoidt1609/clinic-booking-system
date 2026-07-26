@@ -2,7 +2,6 @@ package com.clinic.booking.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/profiles")
-@CrossOrigin("*")
 public class PatientProfileController {
     private final PatientProfileService patientProfileService;
 
@@ -36,10 +34,10 @@ public class PatientProfileController {
     }
     
 
-    @PutMapping("/{userId}")
-    public ResponseEntity<?> updateProfile( @PathVariable Long userId ,@RequestBody PatientProfileRequest request) {
+    @PutMapping("/profile")
+    public ResponseEntity<?> updateProfile(@RequestBody PatientProfileRequest request) {
         try {
-            PatientProfileResponse response = patientProfileService.updateProfile(userId, request);
+            PatientProfileResponse response = patientProfileService.updateProfile(request);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

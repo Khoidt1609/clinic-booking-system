@@ -14,7 +14,9 @@ import com.clinic.booking.entity.Appointment;
 import com.clinic.booking.entity.TimeSlot;
 import com.clinic.booking.entity.User;
 import com.clinic.booking.enums.AppointmentStatus;
+import com.clinic.booking.enums.Role;
 import com.clinic.booking.exception.SlotAlreadyBookedException;
+import com.clinic.booking.helpers.SecurityUtils;
 import com.clinic.booking.repository.AppointmentRepository;
 import com.clinic.booking.repository.TimeSlotRepository;
 import com.clinic.booking.repository.UserRepository;
@@ -32,7 +34,7 @@ public class AppointmentService {
     @Transactional
     public AppointmentResponse createAppointment(AppointmentRequest request) {
 
-        User patient = userRepository.findById(request.getPatientId())
+        User patient = userRepository.findByEmail(SecurityUtils.getCurrentUserEmail())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh nhân"));
 
         User doctor = userRepository.findById(request.getDoctorId())
@@ -72,10 +74,14 @@ public class AppointmentService {
 
     }
 
-    //Lấy lịch sử khám của bệnh nhân
+    // Lấy lịch sử khám của bệnh nhân
     public List<AppointmentResponse> getPatientAppointments(Long patientId) {
-         User patient = userRepository.findById(patientId)
+        User patient = userRepository.findByEmail(SecurityUtils.getCurrentUserEmail())
             .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh nhân"));
+             // Nếu là bệnh nhân, chỉ được xem lịch sử của chính mình
+        if (patient.getRole() == Role.PATIENT && !patient.getId().equals(patientId)) {
+            throw new RuntimeException("Bạn không có quyền xem lịch sử của người khác");
+        }   
 
         List<Appointment> appointments = appointmentRepository.findByPatientIdOrderByAppointmentDateDesc(patientId);
         List<AppointmentResponse> responses = new ArrayList<>();
@@ -98,11 +104,13 @@ public class AppointmentService {
     } 
 
     @Transactional
-    public void cancelAppointment(Long appointmentId, Long patientId) {
+    public void cancelAppointment(Long appointmentId) {
+       User patient = userRepository.findByEmail(SecurityUtils.getCurrentUserEmail())
+            .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh nhân"));
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy lịch hẹn!"));
 
-        if (!appointment.getPatient().getId().equals(patientId)) {
+        if (!appointment.getPatient().getId().equals(patient.getId())) {
             throw new RuntimeException("Bạn không có quyền hủy lịch hẹn này!");
         }
         

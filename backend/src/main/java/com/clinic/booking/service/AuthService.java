@@ -1,8 +1,12 @@
 package com.clinic.booking.service;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.clinic.booking.config.JwtUtil;
 import com.clinic.booking.dto.AuthResponse;
 import com.clinic.booking.dto.LoginRequest;
 import com.clinic.booking.dto.RegisterRequest;
@@ -19,6 +23,10 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+
+
 
     public AuthResponse register(RegisterRequest request) {
 
@@ -39,10 +47,14 @@ public class AuthService {
                         .build();
         
         userRepository.save(newUser);
+
+        String token = jwtUtil.generateToken(newUser.getEmail(), newUser.getRole().name());
+
         return AuthResponse.builder().id(newUser.getId())
                                     .email(newUser.getEmail())
                                     .fullName(newUser.getFullName())
                                     .role(newUser.getRole())
+                                    .token(token)
                                     .message("Đăng ký thành công")
                                     .build();
 
@@ -56,16 +68,25 @@ public class AuthService {
         if(user.getStatus() == UserStatus.LOCKED) {
             throw new RuntimeException("Tài khoản của bạn đã bị khóa!");
         }
-        
-        if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        } catch (BadCredentialsException e) {
             throw new RuntimeException("Mật khẩu đăng nhập không chính xác!");
         }
+        
+        // if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        //     throw new RuntimeException("Mật khẩu đăng nhập không chính xác!");
+        // }
+
+        String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
 
         return AuthResponse.builder()
                 .id(user.getId())
                 .fullName(user.getFullName())
                 .email(user.getEmail())
                 .role(user.getRole())
+                .token(token)
                 .message("Đăng nhập thành công!")
                 .build();
     }

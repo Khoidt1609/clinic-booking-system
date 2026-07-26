@@ -13,7 +13,6 @@ import com.clinic.booking.service.MedicalRecordService;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,12 +23,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
-@RequestMapping("/api/medical-records")
+@RequestMapping("/api/doctor/medical-records")
 public class MedicalRecordController {
     private final MedicalRecordService medicalRecordService;
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<?> createMedicalRecord(@RequestBody MedicalRecordRequest request) {
         try {
             MedicalRecordResponse response = medicalRecordService.createMedicalRecord(request);

@@ -47,7 +47,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/patient/{patientId}")
-    public ResponseEntity<?> getPatientAppointments(@PathVariable Long patientId) {
+    public ResponseEntity<?> getPatientAppointments(@PathVariable("patientId") Long patientId) {
         try {
             List<AppointmentResponse> responses = appointmentService.getPatientAppointments(patientId);
             return ResponseEntity.ok(responses);
@@ -57,9 +57,9 @@ public class AppointmentController {
     }
 
     @PutMapping("/{id}/cancel")
-    public ResponseEntity<?> cancelAppointment(@PathVariable("id") Long appointmentId, @RequestParam Long patientId) {
+    public ResponseEntity<?> cancelAppointment(@PathVariable("id") Long appointmentId) {
         try {
-            appointmentService.cancelAppointment(appointmentId, patientId);
+            appointmentService.cancelAppointment(appointmentId);
             return ResponseEntity.ok(Map.of("message", "Huỷ lịch hẹn thành công"));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

@@ -6,6 +6,7 @@ import com.clinic.booking.dto.PatientProfileRequest;
 import com.clinic.booking.dto.PatientProfileResponse;
 import com.clinic.booking.entity.PatientProfile;
 import com.clinic.booking.entity.User;
+import com.clinic.booking.helpers.SecurityUtils;
 import com.clinic.booking.repository.PatientProfileRepository;
 import com.clinic.booking.repository.UserRepository;
 
@@ -27,10 +28,10 @@ public class PatientProfileService {
     }
 
     @Transactional
-    public PatientProfileResponse updateProfile(Long userId,PatientProfileRequest request) {
-        User user = userRepository.findById(userId)
+    public PatientProfileResponse updateProfile(PatientProfileRequest request) {
+        User user = userRepository.findByEmail(SecurityUtils.getCurrentUserEmail())
                     .orElseThrow(() -> new RuntimeException("Không tìm thấy tài khoản người dùng!"));
-        PatientProfile profile = patientProfileRepository.findByUserId(userId)
+        PatientProfile profile = patientProfileRepository.findByUserId(user.getId())
                     .orElseGet(() -> PatientProfile.builder().user(user).build());
 
         profile.setBloodType(request.getBloodType());
