@@ -1,0 +1,36 @@
+
+.auth-page {
+  font-size: 0.9rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.auth-card {
+  max-width: 420px;
+  width: 100%;
+}
+
+/* Nút mật khẩu */
+/* Đảm bảo ô input chừa không gian ở bên phải để không bị chữ đè lên nút */
+.input-group {
+    position: relative;
+}
+.input-group #password {
+    padding-right: 45px;
+    border-top-right-radius: 0.375rem !important; /* Giữ bo góc cho ô input */
+    border-bottom-right-radius: 0.375rem !important;
+}
+
+/* Hiệu ứng hover tạo vòng tròn mờ phía sau icon */
+.toggle-password:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important; /* Nền mờ xám nhẹ */
+    color: #212529 !important; /* Đậm màu icon hơn khi hover */
+}
+
+/* Xóa viền xanh mặc định khi click (focus) vào nút */
+.toggle-password:focus {
+    box-shadow: none !important;
+}

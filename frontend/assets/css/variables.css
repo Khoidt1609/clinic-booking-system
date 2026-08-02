@@ -1,0 +1,44 @@
+:root {
+--color-primary: #0e7490;
+  --color-primary-dark: #155e75;
+  --color-primary-tint: #e4f3f0;
+  --color-bg: #f7fbfa;
+  --color-surface: #ffffff;
+  --color-text: #1e2a28;
+  --color-text-muted: #5b6d69;
+  --color-border: #d8e6e3;
+  --color-danger: #c0392b;
+  --color-danger-tint: #fbeae8;
+  --color-warning: #b8860b;
+  --color-warning-tint: #fbf3df;;
+   --primary-cyan: #0e7490; /* cyan-700 */
+  --primary-cyan-hover: #155e75; /* cyan-800 */
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-soft: 0 2px 12px rgba(20, 107, 95, 0.08);
+  --shadow-hover: 0 8px 24px rgba(20, 107, 95, 0.12);
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand,
+.btn {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.page-container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+

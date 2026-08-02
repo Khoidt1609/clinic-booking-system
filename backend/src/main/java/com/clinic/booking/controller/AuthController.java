@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*") // Cho phép Frontend gọi API mà không bị lỗi CORS
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;

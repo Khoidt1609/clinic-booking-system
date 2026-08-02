@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/appointments")
-@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class AppointmentController {
     private final AppointmentService appointmentService;

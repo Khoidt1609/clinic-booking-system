@@ -1,0 +1,141 @@
+/* Navbar */
+.app-navbar {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.9rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+.app-navbar .brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+}
+
+.app-navbar .brand::before {
+  content: "⚕";
+  margin-right: 0.4rem;
+  color: var(--color-primary);
+}
+
+.page-container {
+  max-width: 960px; /* Nới rộng một chút cho Form Bệnh án dễ nhìn */
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+/* Kiểu dáng mặc định của các link trên Navbar */
+#navbarNav .nav-link {
+    color: var(--color-text-muted); 
+    position: relative;
+    z-index: 1;                     /* Đẩy chữ nổi lên trên lớp nền mờ */
+    transition: color 0.2s ease;   
+}
+
+/* Hiệu ứng HOVER: Đổi màu chữ đậm hơn một chút khi có nền mờ phía sau */
+#navbarNav .nav-link:hover {
+    color: var(--color-primary-dark); /* Sử dụng màu xanh đậm của hệ thống */
+}
+
+/* Tạo lớp nền mờ ẩn sẵn đằng sau chữ */
+#navbarNav .nav-link::after {
+    content: "";
+    position: absolute;
+    /* Phủ kín toàn bộ diện tích của thẻ nav-link */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    z-index: -1;                     /* Đẩy lớp nền này nằm chìm xuống dưới chữ */
+    background-color: var(--color-primary-tint); /* Sử dụng màu xanh tint mờ (#e4f3f0) của bạn */
+    border-radius: var(--radius-sm);  /* Bo góc nhẹ (8px) theo chuẩn hệ thống của bạn */
+    
+    /* TRƯỚC KHI HOVER: Ẩn nền đi bằng cách làm trong suốt và thu nhỏ nhẹ */
+    opacity: 0;
+    transform: scale(0.9);            
+    
+    /* Làm mượt cả hiệu ứng mờ dần (opacity) và phóng to (transform) */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* KHI HOVER: Hiện lớp nền mờ lên */
+#navbarNav .nav-link:hover::after {
+    opacity: 1;                      /* Hiện rõ nền mờ */
+    transform: scale(1);             /* Phóng về kích thước chuẩn ôm sát link */
+}
+
+#mainNav {
+  background-color: transparent;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+#mainNav.scrolled {
+  background-color: rgba(255, 255, 255, 0.97);
+  box-shadow: var(--shadow-soft);
+}
+
+/* FOOTER */
+
+/* Tiêu đề các cột trong footer */
+.footer-heading {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Biến đổi màu chữ phụ theo thiết kế của bạn */
+.text-muted-custom {
+  color: var(--color-text-muted);
+}
+
+/* Hộp chứa icon dấu cộng kế thừa từ hệ thống màu chính */
+.footer-icon-box {
+  width: 28px;
+  height: 28px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+/* Tùy chỉnh các thẻ liên kết và hiệu ứng Hover */
+.footer-links a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-links li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+/* Đường kẻ ngăn cách mảnh sử dụng màu border hệ thống */
+.footer-divider {
+  border-top: 1px solid var(--color-border);
+}
+
+
+.user-avatar-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
