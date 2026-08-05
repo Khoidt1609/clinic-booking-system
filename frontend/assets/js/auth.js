@@ -53,7 +53,7 @@ async function handleRegister(fromEvent) {
         });
         saveSession(response);
 
-        window.location.href = "/patient/book-appointment.html";
+        window.location.href = "/patient/booking.html";
     } catch (error) {
         errorBox.textContent = error.message;
         errorBox.classList.remove("d-none");

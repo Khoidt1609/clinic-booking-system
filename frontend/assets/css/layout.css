@@ -37,12 +37,14 @@
 }
 
 /* Hiệu ứng HOVER: Đổi màu chữ đậm hơn một chút khi có nền mờ phía sau */
-#navbarNav .nav-link:hover {
+#navbarNav .nav-link:hover
+{
     color: var(--color-primary-dark); /* Sử dụng màu xanh đậm của hệ thống */
 }
 
 /* Tạo lớp nền mờ ẩn sẵn đằng sau chữ */
-#navbarNav .nav-link::after {
+#navbarNav .nav-link::after
+ {
     content: "";
     position: absolute;
     /* Phủ kín toàn bộ diện tích của thẻ nav-link */
@@ -64,7 +66,8 @@
 }
 
 /* KHI HOVER: Hiện lớp nền mờ lên */
-#navbarNav .nav-link:hover::after {
+#navbarNav .nav-link:hover::after
+{
     opacity: 1;                      /* Hiện rõ nền mờ */
     transform: scale(1);             /* Phóng về kích thước chuẩn ôm sát link */
 }

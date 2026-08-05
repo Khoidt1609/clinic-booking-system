@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng khám Đa Khoa - Đặt lịch khám bệnh</title>
+
+    <!-- Nhúng Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Nhúng Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/component.css">
+    <link rel="shortcut icon" href="/assets/images/clinic-hero.jpg" type="image/x-icon">
+
+</head>
+
+<body>
+    <nav class="navbar app-navbar navbar-expand-lg py-3" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="/index.html">
+                <div class="bg-cyan text-white rounded d-flex align-items-center justify-center p-1"
+                    style="width: 32px; height: 32px;">
+                    <i class="bi bi-hospital fs-6 ms-1"></i>
+                </div>
+                Phòng khám Nhẫn Tâm
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-secondary"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-medium">
+                    <a href="/patient/booking.html" class="nav-link d-inline active">Đặt lịch khám</a>
+                    <a href="/patient/appointments.html" class="nav-link d-inline active">Lịch hẹn của tôi</a>
+                    <a href="profile.html" class="nav-link d-inline active">Hồ sơ sức khỏe</a>
+                    <a href="medical-history.html" class="nav-link d-inline active">Lịch sử khám</a>
+                </ul>
+                <div class="d-flex w-sm-100 w-lg-auto  gap-2" id="authNavArea">
+                    <a href="/patient/login.html"
+                        class="btn btn-light fw-medium text-dark border flex-fill w-lg-auto">Đăng nhập</a>
+                    <a href="/patient/login.html" class="btn btn-cyan fw-medium shadow-sm flex-fill w-lg-auto">Đặt lịch
+                        ngay</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="app-card">
+            <h4 class="fw-bold mb-1">Hồ sơ sức khỏe</h4>
+            <p class="text-muted mb-0">Cập nhật thông tin cá nhân và tiền sử bệnh lý</p>
+            <p class="text-muted mb-4">Thông tin này giúp bác sĩ nắm rõ tình trạng của bạn khi khám</p>
+
+            <div id="loadingIndicator" class="text-center py-4 d-none">
+                <div class="spinner-border text-cyan " role="status"></div>
+                <p class="mt-2 text-muted">Đang tải thông tin...</p>
+            </div>
+            <div id="profileError" class="alert alert-danger d-none"></div>
+            <div id="profileSuccess" class="alert alert-success d-none"></div>
+
+            <form id="profileForm" class="text-start d-none">
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label fw-medium ">Họ và tên <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control bg-light" id="fullName" required disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-medium">Email <i class="text-secondary">(Tài khoản đăng
+                                nhập)</i> <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control bg-light" id="email" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-medium">Số điện thoại <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control bg-light" id="phone" required disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-medium">Ngày sinh <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" id="dateOfBirth" required>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="bloodType" class="form-label">Nhóm máu</label>
+                        <select class="form-select" id="bloodType">
+                            <option value="">-- Chọn --</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                            <option value="None">Không rõ</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-medium d-block mt-2">Giới tính <span
+                                class="text-danger">*</span></label>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input" type="radio" name="gender" id="genderMale" value="MALE">
+                            <label for="genderMale">Nam</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="FEMALE">
+                            <label class="form-check-label" for="genderFemale">Nữ</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="genderOther" value="OTHER">
+                            <label class="form-check-label" for="genderOther">Khác</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label fw-medium">Địa chỉ <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ hiện tại...">
+                    </div>
+                </div>
+                <div class="row g-3">
+
+                    <div class="col-12">
+                        <label for="allergies" class="form-label">Dị ứng thuốc / thức ăn <i class="text-secondary">(nếu
+                                có)</i></label>
+                        <textarea class="form-control" id="allergies" rows="2"
+                            placeholder="Vd: dị ứng penicillin, hải sản..."></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label for="medicalHistory" class="form-label">Tiền sử bệnh lý</label>
+                        <textarea class="form-control" id="medicalHistory" rows="3"
+                            placeholder="Vd: tăng huyết áp, tiểu đường type 2..."></textarea>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="submit" class="btn btn-primary px-4 py-2" id="btnSave">
+                        <i class="bi bi-floppy me-2"></i> Lưu thay đổi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/profile.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+
+
+</html>

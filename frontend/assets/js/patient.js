@@ -126,14 +126,3 @@ async function submitBooking() {
 
 }
 
-function info() {
-    const date = document.getElementById("appointmentDate").value;
-    const info = document.getElementById("info");
-    if(selectedSlot) {
-        info.addEventListener("change", () => {
-            info.classList.remove("d-none");
-            info.innerHTML = `Đã chọn: <p class = "text-primary"> ${selectedSlot}-${date}>`;
-        })
-        
-    }
-}

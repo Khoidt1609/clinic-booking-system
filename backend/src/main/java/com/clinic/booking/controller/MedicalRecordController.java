@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/doctor/medical-records")
+@RequestMapping("/api/medical-records")
 public class MedicalRecordController {
     private final MedicalRecordService medicalRecordService;
 

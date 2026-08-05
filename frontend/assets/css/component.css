@@ -1,15 +1,43 @@
-.bg-cyan { background-color: var(--color-primary) !important; }
-.text-cyan { color: var(--color-primary) !important; }
+.bg-cyan {
+  background-color: var(--color-primary) !important;
+}
+
+.text-cyan {
+  color: var(--color-primary) !important;
+}
+
 .btn-cyan {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   color: #fff;
 }
+
 .btn-cyan:hover {
   background-color: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
   color: #fff;
 }
+
+/* Nút viền Cyan */
+.btn-outline-cyan {
+  background-color: transparent;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease-in-out;
+
+}
+
+/* Khi di chuột hoặc tiêu điểm vào nút Cyan */
+.btn-outline-cyan:hover,
+.btn-outline-cyan:focus {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  /* Chữ đổi sang màu trắng nền cyan */
+}
+
 
 /* CARD chung */
 .app-card {
@@ -28,11 +56,13 @@
   font-weight: 600;
   border-radius: var(--radius-sm);
 }
+
 .btn-primary:hover,
 .btn-primary:focus {
   background-color: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
 }
+
 .btn-outline-danger {
   border-radius: var(--radius-sm);
 }
@@ -46,15 +76,36 @@
   font-size: 0.78rem;
   font-weight: 600;
 }
+
 .status-badge--confirmed {
   background: var(--color-primary-tint);
   color: var(--color-primary-dark);
 }
+
 .status-badge--cancelled {
   background: var(--color-danger-tint);
   color: var(--color-danger);
 }
+
 .status-badge--completed {
   background: #ededea;
   color: var(--color-text-muted);
+}
+
+/* CSS tạo hiệu ứng xoay icon mũi tên khi mở thẻ Collapse */
+.collapse-toggle[aria-expanded="true"] .bi-chevron-down {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+.collapse-toggle[aria-expanded="false"] .bi-chevron-down {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+/* Bảng đơn thuốc đẹp hơn */
+.prescription-table th {
+  /* background-color: var(--color-primary-tint); */
+  color: var(--color-primary-dark);
+  font-weight: 600;
 }

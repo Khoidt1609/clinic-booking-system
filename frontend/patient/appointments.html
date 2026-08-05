@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lịch hẹn của tôi - Phòng khám Nhẫn Tâm</title>
-    
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+    <title>Phòng khám Đa Khoa - Đặt lịch khám bệnh</title>
+
     <!-- Nhúng Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Nhúng Bootstrap Icons -->
@@ -15,284 +14,69 @@
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/component.css">
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            color: #334155;
-        }
-        
-        h4, h5 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        /* Định nghĩa tông màu Cyan thương hiệu của phòng khám */
-        .bg-cyan { background-color: #0d9488 !important; }
-        .text-cyan { color: #0d9488 !important; }
-        .bg-cyan-subtle { background-color: #ccfbf1 !important; }
-        .border-cyan-subtle { border-color: #ccfbf1 !important; }
-        .btn-cyan {
-            background-color: #0d9488 !important;
-            color: white !important;
-            border: none;
-        }
-        .btn-cyan:hover {
-            background-color: #0f766e !important;
-        }
-
-        /* Thanh điều hướng Navbar */
-        .app-navbar {
-            background-color: white;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        /* Khung chứa trang */
-        .page-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Tùy chỉnh thanh Tabs */
-        .nav-tabs .nav-link {
-            border: none;
-            color: #64748b;
-            padding: 12px 24px;
-            font-weight: 500;
-        }
-        .nav-tabs .nav-link.active {
-            color: #0d9488 !important;
-            border-bottom: 3px solid #0d9488 !important;
-            background: none;
-            font-weight: 600;
-        }
-        .nav-tabs .nav-link:hover {
-            color: #0d9488;
-            border-color: transparent;
-        }
-
-        /* Thẻ Card lịch hẹn đổ bóng mờ hiệu ứng hover nhẹ */
-        .appointment-card {
-            background-color: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 24px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .appointment-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-        }
-    </style>
+    <link rel="shortcut icon" href="/assets/images/clinic-hero.jpg" type="image/x-icon">
 </head>
+
 <body>
 
-    <!-- 1. THANH NAVBAR DÙNG CHUNG -->
-    <nav class="navbar app-navbar navbar-expand-lg py-3">
+    <nav class="navbar app-navbar navbar-expand-lg py-3" id="mainNav">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="#">
-                <div class="bg-cyan text-white rounded d-flex align-items-center justify-content-center p-1" style="width: 32px; height: 32px;">
-                    <i class="bi bi-hospital fs-6"></i>
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="/index.html">
+                <div class="bg-cyan text-white rounded d-flex align-items-center justify-center p-1"
+                    style="width: 32px; height: 32px;">
+                    <i class="bi bi-hospital fs-6 ms-1"></i>
                 </div>
                 Phòng khám Nhẫn Tâm
             </a>
-            <div class="collapse navbar-collapse id="navbarNav"">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-secondary"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-medium">
-                    <a href="#" class="nav-link text-dark">Đặt lịch khám</a>
-                    <a href="#" class="nav-link text-cyan fw-semibold">Lịch hẹn của tôi</a>
-                    <a href="#" class="nav-link text-dark">Hồ sơ sức khỏe</a>
-                    <a href="#" class="nav-link text-dark">Lịch sử khám</a>
+                    <a href="/patient/booking.html" class="nav-link d-inline active">Đặt lịch khám</a>
+                    <a href="/patient/appointments.html" class="nav-link d-inline active">Lịch hẹn của tôi</a>
+                    <a href="profile.html" class="nav-link d-inline active">Hồ sơ sức khỏe</a>
+                    <a href="medical-history.html" class="nav-link d-inline active">Lịch sử khám</a>
                 </ul>
-                <div class="d-flex gap-2">
-                    <span class="navbar-text fw-medium text-dark me-2">Chào, Bệnh nhân mẫu</span>
-                    <button class="btn btn-sm btn-outline-danger px-3">Đăng xuất</button>
+                <div class="d-flex w-sm-100 w-lg-auto  gap-2" id="authNavArea">
+                    <a href="/patient/login.html"
+                        class="btn btn-light fw-medium text-dark border flex-fill w-lg-auto">Đăng nhập</a>
+                    <a href="/patient/login.html" class="btn btn-cyan fw-medium shadow-sm flex-fill w-lg-auto">Đặt lịch
+                        ngay</a>
                 </div>
             </div>
         </div>
     </nav>
-
-    <!-- 2. NỘI DUNG CHÍNH CỦA TRANG -->
     <div class="page-container">
-        
-        <!-- Tiêu đề trang -->
-        <div class="mb-4">
-            <h4 class="fw-bold mb-1">Lịch hẹn của tôi</h4>
-            <p class="text-muted mb-0">Quản lý và theo dõi trạng thái các lượt khám bệnh của bạn</p>
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h4 class="fw-bold my-1">Lịch hẹn của tôi</h4>
+                <p class="text-muted my-0">Danh sách các lịch khám đã đặt</p>
+            </div>
+            <a href="book-appointment.html" class="btn btn-primary ">Đặt lịch mới <i class="bi bi-plus-lg ms-1"></i></a>
         </div>
 
-        <!-- Bộ lọc trạng thái lịch hẹn dạng Tabs -->
-        <ul class="nav nav-tabs border-bottom mb-4" id="appointmentTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab">
-                    <i class="bi bi-calendar-event me-2"></i>Sắp tới
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">
-                    <i class="bi bi-clock-history me-2"></i>Lịch sử khám
-                </button>
-            </li>
-        </ul>
-
-        <!-- Vùng hiển thị danh sách tương ứng với từng Tab -->
-        <div class="tab-content" id="appointmentTabsContent">
-            
-            <!-- Tab 1: Các lịch hẹn Sắp diễn ra / Chờ khám -->
-            <div class="tab-pane fade show active" id="upcoming" role="tabpanel">
-                <div id="upcomingAppointmentsContainer" class="d-flex flex-column gap-3">
-                    <!-- Khối lịch mẫu sẽ tự động vẽ ra ở đây -->
-                </div>
-            </div>
-            
-            <!-- Tab 2: Lịch sử các ca Đã khám hoặc Đã hủy -->
-            <div class="tab-pane fade" id="history" role="tabpanel">
-                <div id="historyAppointmentsContainer" class="d-flex flex-column gap-3">
-                    <!-- Khối lịch cũ mẫu sẽ tự động vẽ ra ở đây -->
-                </div>
-            </div>
+        <div id="loadingIndicator" class="text-center py-5">
+            <div class="spinner-border text-cyan" role="status"></div>
+            <p class="mt-2 text-muted">Đang tải lịch hẹn...</p>
         </div>
 
+        <div id="appointmentsContainer"></div>
+
+        <div id="emptyState" class="text-center py-5 d-none  text-muted bg-white rounded-3 border">
+            <div class="mb-3">
+                <i class="bi bi-calendar-x text-secondary" style="font-size: 4rem; opacity: 0.5;"></i>
+            </div>
+            <p class="mb-2">Bạn chưa có lịch hẹn nào.</p>
+            <a href="/patient/booking.html" class="btn btn-primary">Đặt lịch khám ngay</a>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/appointments.js"></script>
 
-    <!-- Nhúng Bootstrap 5 Bundle JS (Bắt buộc phải có để chuyển đổi các Tab mượt mà) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- 3. ĐOẠN SCRIPT GIẢ LẬP DỮ LIỆU MẪU ĐỂ VẼ GIAO DIỆN -->
-  <script>
-    // Mảng dữ liệu mẫu giả lập của bạn
-    const mockAppointments = [
-        {
-            id: 101,
-            doctorName: "BS. CKI Nguyễn Văn A",
-            specialtyName: "Khoa Nội tổng quát",
-            appointmentDate: "2026-08-10",
-            startTime: "08:30:00",
-            endTime: "09:00:00",
-            patientSymptoms: "Tôi bị ho khan kéo dài 3 ngày nay, đau rát họng vào buổi sáng và có sốt nhẹ về chiều.",
-            status: "CONFIRMED"
-        },
-        {
-            id: 102,
-            doctorName: "BS. CKI Trần Thị B",
-            specialtyName: "Khoa Nhi",
-            appointmentDate: "2026-08-15",
-            startTime: "14:15:00",
-            endTime: "14:45:00",
-            patientSymptoms: "Đăng ký khám định kỳ và tư vấn dinh dưỡng cho bé 2 tuổi.",
-            status: "PENDING"
-        },
-        {
-            id: 103,
-            doctorName: "ThS. BS Lê Hoàng C",
-            specialtyName: "Khoa Tai Mũi Họng",
-            appointmentDate: "2026-07-20",
-            startTime: "10:00:00",
-            endTime: "10:30:00",
-            patientSymptoms: "Ù tai trái và có tiếng ve kêu trong tai.",
-            status: "COMPLETED"
-        },
-        {
-            id: 104,
-            doctorName: "BS. CKI Nguyễn Văn A",
-            specialtyName: "Khoa Nội tổng quát",
-            appointmentDate: "2026-07-15",
-            startTime: "09:00:00",
-            endTime: "09:30:00",
-            patientSymptoms: "Đau râm râm vùng thượng vị sau khi ăn no.",
-            status: "CANCELLED"
-        }
-    ];
+    <script src="/assets/js/main.js"></script>
+</body>
 
-    // Hàm tự động phân loại dữ liệu mẫu và in ra màn hình
-    function renderMockData() {
-        const upcomingContainer = document.getElementById("upcomingAppointmentsContainer");
-        const historyContainer = document.getElementById("historyAppointmentsContainer");
-
-        const upcomingList = mockAppointments.filter(app => app.status === "PENDING" || app.status === "CONFIRMED");
-        const historyList = mockAppointments.filter(app => app.status === "COMPLETED" || app.status === "CANCELLED");
-
-        upcomingContainer.innerHTML = upcomingList.map(app => buildCardHtml(app, true)).join("");
-        historyContainer.innerHTML = historyList.map(app => buildCardHtml(app, false)).join("");
-    }
-
-    // Hàm xử lý chuỗi HTML cho từng cục Card (ĐÃ SỬA SẠCH LỖI CÚ PHÁP VÀ THÊM CSS BO TRÒN)
-    function buildCardHtml(app, isUpcoming) {
-        const [year, month, day] = app.appointmentDate.split("-");
-        const formattedDate = `${day}/${month}/${year}`;
-
-        let badgeClass = "bg-warning-subtle text-warning";
-        let badgeText = "Chờ xác nhận";
-
-        if (app.status === "CONFIRMED") {
-            badgeClass = "bg-success-subtle text-success";
-            badgeText = "Đã xác nhận";
-        } else if (app.status === "COMPLETED") {
-            badgeClass = "bg-primary-subtle text-primary";
-            badgeText = "Đã khám xong";
-        } else if (app.status === "CANCELLED") {
-            badgeClass = "bg-danger-subtle text-danger";
-            badgeText = "Đã hủy";
-        }
-
-        // ĐÃ SỬA: Bọc thẻ HTML nút bấm vào trong dấu nháy ngược ``
-        const actionButton = (isUpcoming && app.status !== "CANCELLED")
-            ? `<button class="btn btn-outline-danger btn-sm px-3 fw-medium" onclick="mockCancel(${app.id})"> 
-                    <i class="bi bi-calendar-x me-1"></i> Hủy lịch hẹn 
-               </button>`
-            : "";
-
-        // ĐÃ SỬA: Tạo khung div bao ngoài chứa class card Bootstrap và id="card-..." để chạy được hàm hủy lịch
-        return `
-        <div class="card p-4 border border-light-subtle rounded-3 shadow-sm bg-white mb-2" id="card-${app.id}">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
-                <div class="d-flex align-items-start gap-3">
-                    <div class="bg-info-subtle text-info rounded-3 p-3 d-flex align-items-center justify-content-center" style="width: 52px; height: 52px; flex-shrink: 0;">
-                        <i class="bi bi-person-pulse fs-4 text-dark"></i>
-                    </div>
-                    <div>
-                        <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
-                            <h5 class="fw-bold mb-0 text-dark" style="font-size: 1.1rem;">${app.doctorName}</h5>
-                            <span class="badge ${badgeClass} fw-semibold px-2.5 py-1" style="font-size: 0.75rem;">${badgeText}</span>
-                        </div>
-                        <p class="text-secondary small mb-2">Chuyên khoa: <span class="text-dark fw-medium">${app.specialtyName}</span></p>
-                        
-                        <div class="d-flex gap-3 text-muted small flex-wrap">
-                            <span><i class="bi bi-calendar3 me-1 text-primary"></i>${formattedDate}</span>
-                            <span><i class="bi bi-clock me-1 text-primary"></i>${app.startTime.substring(0, 5)} - ${app.endTime.substring(0, 5)}</span>
-                        </div>
-                        
-                        ${app.patientSymptoms ? `<div class="mt-2 text-secondary small bg-light p-2 rounded-2 border-start border-3 border-info-subtle"><strong>Triệu chứng:</strong> ${app.patientSymptoms}</div>` : ""}
-                    </div>
-                </div>
-                <div class="text-md-end align-self-end align-self-md-center">
-                    ${actionButton}
-                </div>
-            </div>
-        </div>`;
-    }
-
-    // Hàm giả lập hành động bấm nút hủy lịch hẹn mẫu
-    function mockCancel(id) {
-        if (confirm("Bạn có chắc chắn muốn hủy lịch hẹn khám bệnh này không?")) {
-            alert("MÔ PHỎNG: Đã hủy thành công lịch hẹn số " + id);
-            
-            const card = document.getElementById("card-" + id);
-            if (card) {
-                card.style.opacity = "0.5";
-                const badge = card.querySelector(".badge");
-                if(badge) {
-                    badge.className = "badge bg-danger-subtle text-danger fw-semibold px-2.5 py-1";
-                    badge.innerText = "Đã hủy";
-                }
-                const button = card.querySelector("button");
-                if (button) button.remove();
-            }
-        }
-    }
-
-    // Kích hoạt chạy render dữ liệu mẫu khi vừa mở trang web
-    document.addEventListener("DOMContentLoaded", () => {
-        renderMockData();
-    });
-</script>
+</html>
