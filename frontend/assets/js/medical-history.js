@@ -53,7 +53,7 @@ function renderMedicalHistory(records) {
                         </div>
                         <div>
                             <div class="fw-medium">${record.doctorDiagnosis || "Chưa có chẩn đoán"}</div>
-                            <div class="fw-semibold text-muted small">${formatDate(record.appointmentDate)}</div>
+                            <div class="fw-semibold text-muted small">${formatDateForView(record.appointmentDate)}</div>
                         </div>
                        
                     </div>

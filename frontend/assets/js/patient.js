@@ -3,16 +3,21 @@ let currentDoctorId = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
     const user = requiredAuth("PATIENT");
-    if(!user) return;
+    if (!user) return;
 
     const doctor = await getDoctor();
     currentDoctorId = doctor.id;
 
     const dateInput = document.getElementById("appointmentDate");
-    const today = new Date().toISOString().split("T")[0];
+    const now = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(now.getDate() + 21);
 
-    dateInput.min = today;
-    dateInput.value = today;
+    const todayStr = formatDateForInput(now);
+    const maxStr = formatDateForInput(maxDate);
+    dateInput.min = todayStr;
+    dateInput.value = todayStr;
+    dateInput.max = maxStr;
     dateInput.addEventListener("change", loadSlots);
     document.getElementById("confirmBtn").addEventListener("click", submitBooking);
 
@@ -22,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function loadSlots() {
     const date = document.getElementById("appointmentDate").value;
     const slotContainer = document.getElementById("slotContainer");
-    
+
     slotContainer.innerHTML = `<p class="text-muted"> Đang tải khung giờ...</p>`;
     selectedSlot = null;
     updateConfirmButtonState();
@@ -44,17 +49,17 @@ function renderSlot(slots) {
     const container = document.getElementById("slotContainer");
     container.innerHTML = "";
 
-    if(slots.length === 0) {
+    if (slots.length === 0) {
         container.innerHTML = `<p class="text-muted">Chưa có khung giờ nào được thiết lập.</p>`;
         return;
     }
 
-    if(morning.length > 0) {
+    if (morning.length > 0) {
         container.innerHTML += `<div class="slot-session-label">Buổi sáng</div>`;
         container.innerHTML += buildSlotGrid(morning);
-    } 
-    if(afternoon.length > 0) {
-        container.innerHTML +=`<div class="slot-session-label">Buổi chiều</div>`;
+    }
+    if (afternoon.length > 0) {
+        container.innerHTML += `<div class="slot-session-label">Buổi chiều</div>`;
         container.innerHTML += buildSlotGrid(afternoon);
     }
 }
@@ -65,14 +70,14 @@ function buildSlotGrid(slots) {
         return `
         <div class="slot-chip ${disabled ? "slot-chip--disabled" : ""}"
             ${disabled ? "" : `onclick="selectSlot(${slot.id},'${slot.startTime}','${slot.endTime}', this)"`}>
-        ${slot.startTime.substring(0,5)}
+        ${slot.startTime.substring(0, 5)}
         </div>`;
     }).join("");
     return `<div class = "slot-grid mb-2"> ${chips}</div>`;
 }
 
 function selectSlot(id, startTime, endTime, chipEl) {
-     // Bỏ trạng thái "đang chọn" ở chip cũ
+    // Bỏ trạng thái "đang chọn" ở chip cũ
     document.querySelectorAll(".slot-chip--selected").forEach(element => {
         element.classList.remove("slot-chip--selected");
     });
@@ -84,11 +89,11 @@ function selectSlot(id, startTime, endTime, chipEl) {
         endTime: endTime,
     };
 
-    const dateInput =  document.getElementById("appointmentDate").value;
+    const dateInput = document.getElementById("appointmentDate").value;
     const infoBox = document.getElementById("info");
 
-    if(dateInput && infoBox) {
-        infoBox.innerHTML = `Đã chọn: <strong class= "text-cyan">${startTime.substring(0,5)} - ${dateInput}`;
+    if (dateInput && infoBox) {
+        infoBox.innerHTML = `Đã chọn: <strong class= "text-cyan">${startTime.substring(0, 5)} - ${dateInput}`;
 
         infoBox.classList.remove("d-none");
     }
@@ -117,7 +122,7 @@ async function submitBooking() {
                 patientSymptoms: symptoms
             }
         });
-         alert("Đặt lịch khám thành công!");
+        alert("Đặt lịch khám thành công!");
         // window.location.href = "appointments.html";
     } catch (error) {
         errorBox.textContent = error.message;

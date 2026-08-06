@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển Bác sĩ - Phòng khám Đa khoa</title>
+
+    <!-- Fonts & CSS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/doctor.css">
+    <link rel="stylesheet" href="/assets/css/component.css">
+</head>
+
+<body>
+    <div class="doctor-layout">
+        <!-- SIDEBAR BÊN TRÁI -->
+        <div id="sidebarContainer"></div>
+
+
+        <!-- NỘI DUNG CHÍNH BÊN PHẢI -->
+        <main class="main-content">
+            <div class="p-4 p-md-5">
+                <!-- Khu vực Tiêu đề & Bộ lọc -->
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                    <div>
+                        <h3 class="fw-bold mb-1 text-dark">Lịch làm việc</h3>
+                        <p class="text-muted mb-0">Quản lý và tiếp nhận các ca khám bệnh</p>
+                    </div>
+
+                    <div
+                        class="d-flex align-items-center gap-2 bg-white p-2 rounded-3 shadow-sm border border-light-subtle">
+                        <label for="filterDate" class="fw-medium text-muted ms-2 mb-0">Ngày lọc:</label>
+                        <input type="date" class="form-control form-control-sm border-0 bg-light" id="filterDate"
+                            style="width: 140px;">
+                        <button class="btn btn-sm btn-primary" id="todayBtn">Hôm nay</button>
+                    </div>
+                </div>
+
+                <!-- Thống kê nhanh -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div
+                            class="card stat-card border-0 shadow-sm rounded-3 p-3 border-start border-4 border-primary bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="text-muted small fw-semibold text-uppercase mb-1">Tổng ca khám</p>
+                                    <h3 class="fw-bold mb-0 text-dark" id="statTotal">0</h3>
+                                </div>
+                                <div class="bg-primary bg-opacity-10 text-primary rounded p-3"><i
+                                        class="bi bi-people fs-3"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div
+                            class="card stat-card border-0 shadow-sm rounded-3 p-3 border-start border-4 border-warning bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="text-muted small fw-semibold text-uppercase mb-1">Đang chờ</p>
+                                    <h3 class="fw-bold mb-0 text-dark" id="statWaiting">0</h3>
+                                </div>
+                                <div class="bg-warning bg-opacity-10 text-warning rounded p-3"><i
+                                        class="bi bi-hourglass-split fs-3"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div
+                            class="card stat-card border-0 shadow-sm rounded-3 p-3 border-start border-4 border-success bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="text-muted small fw-semibold text-uppercase mb-1">Đã khám xong</p>
+                                    <h3 class="fw-bold mb-0 text-dark" id="statCompleted">0</h3>
+                                </div>
+                                <div class="bg-success bg-opacity-10 text-success rounded p-3"><i
+                                        class="bi bi-check-circle fs-3"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bảng danh sách bệnh nhân -->
+                <div class="card border-light-subtle shadow-sm rounded-4 bg-white">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light text-uppercase">
+                                    <tr>
+                                        <th class="px-4 py-3 text-muted fw-semibold border-bottom-0">Giờ khám</th>
+                                        <th class="py-3 text-muted fw-semibold border-bottom-0">Bệnh nhân</th>
+                                        <th class="py-3 text-muted fw-semibold border-bottom-0">Triệu chứng lâm sàng
+                                        </th>
+                                        <th class="py-3 text-muted fw-semibold border-bottom-0">Trạng thái</th>
+                                        <th class="px-5 py-3 text-end text-muted fw-semibold border-bottom-0">Thao
+                                            tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="appointmentTableBody" class=" ">
+                                    <!-- render data  -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Loading -->
+                        <div id="loadingIndicator" class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status"></div>
+                            <p class="mt-2 text-muted">Đang tải lịch khám...</p>
+                        </div>
+
+                        <!-- Empty State -->
+                        <div id="emptyState" class="text-center py-5 d-none">
+                            <i class="bi bi-inbox fs-1 text-muted mb-3 d-block"></i>
+                            <h5 class="fw-bold text-dark">Lịch trống</h5>
+                            <p class="text-muted">Không có bệnh nhân nào được xếp lịch vào ngày này.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/component.js"></script>
+    <script src="/assets/js/doctor-dashboard.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

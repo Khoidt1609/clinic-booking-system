@@ -8,7 +8,6 @@
   z-index: 1000;
 }
 
-
 .app-navbar .brand {
   font-weight: 700;
   font-size: 1.25rem;
@@ -23,59 +22,65 @@
 }
 
 .page-container {
-  max-width: 960px; /* Nới rộng một chút cho Form Bệnh án dễ nhìn */
+  max-width: 960px;
+  /* Nới rộng một chút cho Form Bệnh án dễ nhìn */
   margin: 0 auto;
   padding: 2rem 1.25rem;
 }
 
 /* Kiểu dáng mặc định của các link trên Navbar */
 #navbarNav .nav-link {
-    color: var(--color-text-muted); 
-    position: relative;
-    z-index: 1;                     /* Đẩy chữ nổi lên trên lớp nền mờ */
-    transition: color 0.2s ease;   
+  color: var(--color-text-muted);
+  position: relative;
+  z-index: 1;
+  /* Đẩy chữ nổi lên trên lớp nền mờ */
+  transition: color 0.2s ease;
 }
 
 /* Hiệu ứng HOVER: Đổi màu chữ đậm hơn một chút khi có nền mờ phía sau */
-#navbarNav .nav-link:hover
-{
-    color: var(--color-primary-dark); /* Sử dụng màu xanh đậm của hệ thống */
+#navbarNav .nav-link:hover {
+  color: var(--color-primary-dark);
+  /* Sử dụng màu xanh đậm của hệ thống */
 }
 
 /* Tạo lớp nền mờ ẩn sẵn đằng sau chữ */
-#navbarNav .nav-link::after
- {
-    content: "";
-    position: absolute;
-    /* Phủ kín toàn bộ diện tích của thẻ nav-link */
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    
-    z-index: -1;                     /* Đẩy lớp nền này nằm chìm xuống dưới chữ */
-    background-color: var(--color-primary-tint); /* Sử dụng màu xanh tint mờ (#e4f3f0) của bạn */
-    border-radius: var(--radius-sm);  /* Bo góc nhẹ (8px) theo chuẩn hệ thống của bạn */
-    
-    /* TRƯỚC KHI HOVER: Ẩn nền đi bằng cách làm trong suốt và thu nhỏ nhẹ */
-    opacity: 0;
-    transform: scale(0.9);            
-    
-    /* Làm mượt cả hiệu ứng mờ dần (opacity) và phóng to (transform) */
-    transition: opacity 0.2s ease, transform 0.2s ease;
+#navbarNav .nav-link::after {
+  content: "";
+  position: absolute;
+  /* Phủ kín toàn bộ diện tích của thẻ nav-link */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  z-index: -1;
+  /* Đẩy lớp nền này nằm chìm xuống dưới chữ */
+  background-color: var(--color-primary-tint);
+  /* Sử dụng màu xanh tint mờ (#e4f3f0) của bạn */
+  border-radius: var(--radius-sm);
+  /* Bo góc nhẹ (8px) theo chuẩn hệ thống của bạn */
+
+  /* TRƯỚC KHI HOVER: Ẩn nền đi bằng cách làm trong suốt và thu nhỏ nhẹ */
+  opacity: 0;
+  transform: scale(0.9);
+
+  /* Làm mượt cả hiệu ứng mờ dần (opacity) và phóng to (transform) */
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 /* KHI HOVER: Hiện lớp nền mờ lên */
-#navbarNav .nav-link:hover::after
-{
-    opacity: 1;                      /* Hiện rõ nền mờ */
-    transform: scale(1);             /* Phóng về kích thước chuẩn ôm sát link */
+#navbarNav .nav-link:hover::after {
+  opacity: 1;
+  /* Hiện rõ nền mờ */
+  transform: scale(1);
+  /* Phóng về kích thước chuẩn ôm sát link */
 }
 
 #mainNav {
   background-color: transparent;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
+
 #mainNav.scrolled {
   background-color: rgba(255, 255, 255, 0.97);
   box-shadow: var(--shadow-soft);

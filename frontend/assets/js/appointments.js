@@ -13,7 +13,7 @@ async function loadAppointments(patientId) {
         renderAppointments(appointments);
 
     } catch (error) {
-       alert("Không thể tải danh sách lịch hẹn: " + error.message);
+        alert("Không thể tải danh sách lịch hẹn: " + error.message);
         document.getElementById('loadingIndicator').innerHTML = '<span class="text-danger">Lỗi tải dữ liệu.</span>';
 
     }
@@ -21,26 +21,18 @@ async function loadAppointments(patientId) {
 
 function renderAppointments(appointments) {
     document.getElementById('loadingIndicator').classList.add('d-none');
-    
+
     const container = document.getElementById("appointmentsContainer");
     const emptyState = document.getElementById("emptyState");
 
-    if(appointments.length === 0) {
-        emptyState.classList.remove("d-none"); 
+    if (appointments.length === 0) {
+        emptyState.classList.remove("d-none");
         return;
     }
 
-    const statusMap = {
-        CONFIRMED: { label: "Chờ khám", cls: "status-badge--confirmed" },
-        CANCELLED: { label: "Đã hủy", cls: "status-badge--cancelled" },
-        COMPLETED: { label: "Đã khám xong", cls: "status-badge--completed" }
-    };
-
     container.innerHTML = appointments.map(a => {
-        const status = statusMap[a.status] || {label: a.status, cls: ""};
-        
         const canCancel = a.status === "CONFIRMED";
-        const actionButton = ( a.status !== "CANCELLED")
+        const actionButton = (a.status !== "CANCELLED")
             ? `<button class="btn btn-outline-danger btn-sm px-3 fw-medium" onclick="cancelAppointment(${a.appointmentId})"> 
                     <i class="bi bi-calendar-x me-1"></i> Hủy lịch hẹn 
                </button>`
@@ -56,16 +48,16 @@ function renderAppointments(appointments) {
                     <div>
                         <div class="d-flex align-items-center gap-2 flex-wrap mb-1 text-dark">
                             Bác sĩ:<h5 class="fw-bold mb-0 text-dark" style="font-size: 1rem;">${a.doctorName}</h5></p>
-                            <span class="badge status-badge ${status.cls} fw-semibold px-2.5 py-1" style="font-size: 0.75rem;">${status.label}</span>
+                            ${getStatusBadgeHtml(a.status)}
                         </div>
                         
                         <div class="d-flex gap-3 text-muted small flex-wrap">
-                            <span><i class="bi bi-calendar3 me-1 text-cyan"></i>${formatDate(a.appointmentDate)}</span>
+                            <span><i class="bi bi-calendar3 me-1 text-cyan"></i>${formatDateForView(a.appointmentDate)}</span>
                             <span><i class="bi bi-clock me-1 text-cyan"></i>${a.timeSlot}</span>
                         </div>
                         
-                        ${a.symptoms ? `<div class="mt-2 text-secondary small bg-light p-2 rounded-2 border-start border-3 border-info-subtle"><strong>Triệu chứng:</strong> ${a.symptoms}</div>` : 
-                        ` <p class="mt-2 mb-0 text-secondary small  p-2 ">Không có mô tả triệu chứng </p>`}
+                        ${a.symptoms ? `<div class="mt-2 text-secondary small bg-light p-2 rounded-2 border-start border-3 border-info-subtle"><strong>Triệu chứng:</strong> ${a.symptoms}</div>` :
+                ` <p class="mt-2 mb-0 text-secondary small  p-2 ">Không có mô tả triệu chứng </p>`}
                     </div>
                 </div>
                 <div class="text-md-end align-self-end align-self-md-center">
@@ -77,7 +69,7 @@ function renderAppointments(appointments) {
 }
 
 async function cancelAppointment(appointmentId) {
-    if(!confirm("Bạn chắc chắn muốn hủy lịch hẹn này?")) return;
+    if (!confirm("Bạn chắc chắn muốn hủy lịch hẹn này?")) return;
 
     try {
         await apiFetch(`appointments/${appointmentId}/cancel`, {

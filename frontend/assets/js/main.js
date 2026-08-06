@@ -1,50 +1,50 @@
 //  xử lý Navbar cuộn
-document.addEventListener("DOMContentLoaded", function() {
-            const navbar = document.getElementById("mainNav");
-            
-            window.addEventListener("scroll", function() {
-                if (window.scrollY > 20) {
-                    navbar.classList.add("scrolled");
-                } else {
-                    navbar.classList.remove("scrolled");
-                }
-            });
-    
+document.addEventListener("DOMContentLoaded", function () {
+  const navbar = document.getElementById("mainNav");
+
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 20) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+
 });
 
 
 
 // LOGOUT
 function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
 
-    window.location.href = "/index.html"
+  window.location.href = "/index.html"
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-      const navbar = document.getElementById("mainNav");
-            
-            window.addEventListener("scroll", function() {
-                if (window.scrollY > 20) {
-                    navbar.classList.add("scrolled");
-                } else {
-                    navbar.classList.remove("scrolled");
-                }
-            });
-    // Chạy hàm hiển thị nav mới
-    renderAuthNav();
+  const navbar = document.getElementById("mainNav");
 
-    // Lắng nghe sk click logout
-    const container = document.getElementById("authNavArea");
-    if(container) {
-        container.addEventListener("click", function(event) {
-            if(event.target && event.target.id == "logoutBtn") {
-                event.preventDefault();
-                logout();
-            }
-        })
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 20) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
     }
+  });
+  // Chạy hàm hiển thị nav mới
+  renderAuthNav();
+
+  // Lắng nghe sk click logout
+  const container = document.getElementById("authNavArea");
+  if (container) {
+    container.addEventListener("click", function (event) {
+      if (event.target && event.target.id == "logoutBtn") {
+        event.preventDefault();
+        logout();
+      }
+    })
+  }
 })
 
 
@@ -84,7 +84,26 @@ function renderAuthNav(containerId = "authNavArea") {
   }
 }
 
-function formatDate(isoDate) {
+const statusMap = {
+  CONFIRMED: { label: "Chờ khám", cls: "status-badge--confirmed" },
+  CANCELLED: { label: "Đã hủy", cls: "status-badge--cancelled" },
+  COMPLETED: { label: "Đã khám xong", cls: "status-badge--completed" }
+};
+
+function getStatusBadgeHtml(status) {
+  const badge = statusMap[status] || { label: status, cls: "bg-light text-dark" };
+  return `<span class="badge status-badge ${badge.cls} fw-semibold px-2.5 py-1" style="font-size: 0.8rem;">${badge.label}</span>`
+}
+
+
+function formatDateForView(isoDate) {
   const [year, month, day] = isoDate.split("-");
   return `${day}/${month}/${year}`;
+}
+
+function formatDateForInput(dateObj) {
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }

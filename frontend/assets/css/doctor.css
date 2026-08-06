@@ -1,0 +1,116 @@
+/*   ADMIN / DOCTOR LAYOUT (SIDEBAR) */
+.doctor-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    /* Màu nền nhẹ cho toàn trang */
+}
+
+.main-content {
+    flex: 1;
+    /* Tự động chiếm trọn khoảng trống còn lại bên phải */
+    min-width: 0;
+    /* BẮT BUỘC: Giúp bảng (table) responsive mà không làm vỡ flexbox */
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+
+/* Cột Sidebar cố định */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    /* Cao bằng màn hình */
+    flex-shrink: 0;
+}
+
+/* Các link trong Sidebar */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1.25rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-bottom: 0.4rem;
+}
+
+.sidebar-link:hover {
+    background-color: var(--color-primary-tint);
+    color: var(--color-primary-dark);
+}
+
+.sidebar-link.active {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(14, 116, 144, 0.2);
+    /* Đổ bóng nhẹ cho nút active */
+}
+
+/* Cột Nội dung chính */
+.main-content {
+    flex-grow: 1;
+    height: 100vh;
+    overflow-y: auto;
+    /* Cuộn nội dung nếu quá dài */
+}
+
+.stat-card {
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+/* ==========================================
+   3. BẢNG DANH SÁCH BỆNH NHÂN (TABLE)
+   ========================================== */
+.table th {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    background-color: var(--color-bg);
+}
+
+.table tbody tr {
+    font-size: 0.9rem;
+    transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f5f9;
+    /* Đổi màu nền nhẹ khi di chuột qua hàng */
+}
+
+/* Đường viền thẻ nhẹ nhàng */
+.border-light-subtle {
+    border-color: #e2e8f0 !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--color-primary-tint);
+}
+
+/* RESPONSIVE CHO MÀN HÌNH MÁY TÍNH BẢNG, DI ĐỘNG */
+@media (max-width: 767.98px) {
+    .doctor-layout {
+        flex-direction: column;
+        /* Xếp dọc Sidebar và Main content trên thiết bị di động */
+    }
+
+    .sidebar {
+        width: 100% !important;
+        min-width: 100% !important;
+        height: auto !important;
+        position: relative !important;
+    }
+}
