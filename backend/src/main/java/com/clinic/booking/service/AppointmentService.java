@@ -74,6 +74,30 @@ public class AppointmentService {
 
     }
 
+    public AppointmentResponse getAppointmentById(Long id) {
+        Appointment appointment = appointmentRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Không tìm thấy lịch hẹn"));
+
+        // Chỉ bác sĩ phụ trách hoặc chính bệnh nhân đó mới được xem
+        String currentEmail = SecurityUtils.getCurrentUserEmail();
+        boolean isDoctor = appointment.getDoctor().getEmail().equals(currentEmail);
+        boolean isPatient = appointment.getPatient().getEmail().equals(currentEmail);
+        if (!isDoctor && !isPatient) {
+            throw new RuntimeException("Bạn không có quyền xem lịch hẹn này");
+        }
+
+        return AppointmentResponse.builder()
+                                        .appointmentId(appointment.getId())
+                                        .patientId(appointment.getPatient().getId())
+                                        .patientName(appointment.getPatient().getFullName())
+                                        .patientPhone(appointment.getPatient().getPhone())
+                                        .timeSlot(appointment.getTimeSlot().getStartTime() + " - " + appointment.getTimeSlot().getEndTime())
+                                        .appointmentDate(appointment.getAppointmentDate().toString())
+                                        .symptoms(appointment.getPatientSymptoms())
+                                        .status(appointment.getStatus().toString())
+                                        .build();
+    }
+
     // Lấy lịch sử khám của bệnh nhân
     public List<AppointmentResponse> getPatientAppointments(Long patientId) {
         User patient = userRepository.findByEmail(SecurityUtils.getCurrentUserEmail())

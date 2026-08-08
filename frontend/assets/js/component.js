@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     renderSidebar();
+    updateSidebarUser();
+
 });
 
 function renderSidebar() {
@@ -49,7 +51,7 @@ function renderSidebar() {
                     <div class="bg-cyan text-white rounded-3 d-flex align-items-center justify-content-center p-1" style="width: 36px; height: 36px;">
                         <i class="bi bi-hospital fs-5"></i>
                     </div>
-                    <span>Doctor Portal</span>
+                    <span>Doctor Dashboard</span>
                 </a>
             </div>
             
@@ -61,12 +63,11 @@ function renderSidebar() {
             <!-- Profile & Đăng xuất -->
             <div class="p-3 border-top bg-light-subtle">
                 <div class="d-flex align-items-center gap-3 px-1 mb-3">
-                    <div class="bg-cyan-subtle text-cyan rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 42px; height: 42px;">
+                    <div class="bg-info-subtle text-cyan rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 42px; height: 42px;">
                         <i class="bi bi-person-fill fs-4"></i>
                     </div>
                     <div class="overflow-hidden">
-                        <h6 class="mb-0 fw-bold text-truncate text-dark" id="doctorNameDisplay">BS. Đang tải...</h6>
-                        <small class="text-muted d-block text-truncate" id="doctorSpecialtyDisplay">Chuyên khoa --</small>
+                        <h6 class="mb-0 fw-bold text-dark" id="doctorNameDisplay">BS. Đang tải...</h6>
                     </div>
                 </div>
                 <button class="btn btn-outline-danger w-100 fw-medium btn-sm py-2" onclick="logout()">
@@ -79,10 +80,13 @@ function renderSidebar() {
 
 function updateSidebarUser() {
     const user = getCurrentUser();
-    if (!user) return;
+    if (!user) {
+        return;
+    };
 
     try {
         const nameEl = document.getElementById("doctorNameDisplay");
+        console.log(nameEl)
         if (nameEl) nameEl.textContent = `BS. ${user.fullName || user.name || ''}`;
     } catch (error) {
         console.error("Lỗi đọc thông tin user sidebar:", error);

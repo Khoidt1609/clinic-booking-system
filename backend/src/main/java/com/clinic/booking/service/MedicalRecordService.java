@@ -131,6 +131,7 @@ public class MedicalRecordService {
                                     .recordId(medicalRecord.getId())
                                     .appointmentId(medicalRecord.getAppointment().getId())
                                     .patientName(medicalRecord.getAppointment().getPatient().getFullName())
+                                    .doctorName(medicalRecord.getAppointment().getDoctor().getFullName())
                                     .doctorDiagnosis(medicalRecord.getDoctorDiagnosis())
                                     .doctorNotes(medicalRecord.getDoctorNotes())
                                     .prescriptionItems(newItems)

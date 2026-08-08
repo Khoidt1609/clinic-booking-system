@@ -2,6 +2,7 @@ package com.clinic.booking.repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,10 @@ import com.clinic.booking.entity.Appointment;
 import com.clinic.booking.enums.AppointmentStatus;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
+    // Lấy thông tin 1 lịch hẹn cụ thể
+    @EntityGraph(attributePaths = {"patient", "doctor", "timeSlot"})
+    Optional<Appointment> findById(Long id);
+
     // Check trung lich
     boolean existsByDoctorIdAndTimeSlotIdAndAppointmentDateAndStatusNot(
         Long doctorId, Long slotId, LocalDate date, AppointmentStatus status

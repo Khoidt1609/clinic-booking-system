@@ -53,7 +53,7 @@ public class MedicalRecordController {
             MedicalRecordResponse response = medicalRecordService.getByAppointmentId(appointmentId);
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.ok(null);
         }
     }
 

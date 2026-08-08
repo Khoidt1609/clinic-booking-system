@@ -65,6 +65,7 @@ public class SecurityConfig {
                                             .requestMatchers("/api/doctor/**").hasRole("DOCTOR")
                                             .requestMatchers("/api/patient/**").hasRole("PATIENT")
                                             .requestMatchers("/api/time-slots/**").permitAll()
+                                            .requestMatchers("/error").permitAll()
                                             .anyRequest().authenticated()
                                         ).formLogin(form -> form.disable())
                                         .httpBasic(basic -> basic.disable())

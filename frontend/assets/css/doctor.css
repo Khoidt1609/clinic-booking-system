@@ -1,4 +1,4 @@
-/*   ADMIN / DOCTOR LAYOUT (SIDEBAR) */
+/*  DOCTOR LAYOUT (SIDEBAR) */
 .doctor-layout {
     display: flex;
     min-height: 100vh;
@@ -18,7 +18,7 @@
 
 /* Cột Sidebar cố định */
 .sidebar {
-    width: 260px;
+    width: 300px;
     background-color: #ffffff;
     border-right: 1px solid var(--color-border);
     display: flex;
@@ -72,9 +72,8 @@
     transform: translateY(-3px);
 }
 
-/* ==========================================
-   3. BẢNG DANH SÁCH BỆNH NHÂN (TABLE)
-   ========================================== */
+/* Bảng danh sách bệnh nhân/lịch khám
+*/
 .table th {
     font-size: 0.8rem;
     letter-spacing: 0.04em;
@@ -98,6 +97,82 @@
 
 .table-hover tbody tr:hover {
     background-color: var(--color-primary-tint);
+}
+
+/* TRANG XEM HỒ SƠ BỆNH ÁN BỆNH NHÂN */
+/* Cấu hình chiều cao để 2 cột có thanh cuộn độc lập */
+.master-detail-container {
+    height: calc(100vh - 40px);
+    /* Trừ đi padding của main */
+    display: flex;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+
+/* Cột bên trái: Danh sách bệnh nhân */
+.master-list {
+    width: 35%;
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.patient-list-container {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.patient-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.patient-item:hover {
+    background-color: var(--color-primary-tint);
+}
+
+.patient-item.active {
+    background-color: var(--color-primary-tint);
+    border-left: 4px solid var(--color-primary);
+}
+
+/* Cột bên phải: Chi tiết hồ sơ */
+.detail-view {
+    width: 65%;
+    background-color: #f8f9fa;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Cột dọc Timeline lịch sử khám */
+.timeline {
+    border-left: 2px dashed #dee2e6;
+    padding-left: 20px;
+    margin-left: 10px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--color-primary);
 }
 
 /* RESPONSIVE CHO MÀN HÌNH MÁY TÍNH BẢNG, DI ĐỘNG */

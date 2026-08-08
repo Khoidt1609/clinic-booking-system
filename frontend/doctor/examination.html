@@ -4,10 +4,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bảng điều khiển Bác sĩ - Phòng khám Đa khoa</title>
+
+    <!-- Fonts & CSS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/doctor.css">
+    <link rel="stylesheet" href="/assets/css/component.css">
 </head>
 
 <body>
+    <div class="doctor-layout">
+        <div id="sidebarContainer"></div>
+
+        <main class="main-content">
+            <div class=" pt-md-5 pb-2 px-4 px-md-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="dashboard.html"
+                            class="btn btn-outline-secondary rounded-circle p-2 d-flex align-items-center justify-content-center"
+                            style="width: 40px; height: 40px;">
+                            <i class="bi bi-arrow-left"></i>
+                        </a>
+                        <div>
+                            <h4 class="fw-bold mb-0 text-dark">Tiến hành khám bệnh</h4>
+                            <p class="text-muted small mb-0">Cập nhật hồ sơ bệnh án và kê đơn thuốc</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loadingPatient" class="text-center py-4">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2 text-muted">Đang tải thông tin ca khám...</p>
+            </div>
+
+            <!-- Khung Form Khám bệnh  -->
+            <div id="examinationContainer" class="d-none pb-4 pb-md-5 pt-0 px-4 px-md-5">
+
+                <!-- Card Thông tin bệnh nhân -->
+                <div class="card bg-light border-0 shadow-sm rounded-3 mb-4">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center justify-content-between gap-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-info bg-opacity-10 text-info rounded-circle d-flex align-items-center justify-content-center"
+                                    style="width: 50px; height: 50px;">
+                                    <i class="bi bi-person-bounding-box fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold text-dark mb-1" id="patientName">Tên Bệnh Nhân</h5>
+                                    <div class="d-flex gap-3 text-muted small mb-2">
+                                        <span id="examTime"><i class="bi bi-clock"></i> Giờ khám: ---</span>
+                                        <span id="appointmentDate"><i class="bi bi-calendar3"></i> Ngày khám: ---</span>
+
+                                    </div>
+                                    <div class="bg-light p-2 rounded small text-dark mt-2 border">
+                                        <strong><i class="bi bi-chat-left-dots text-primary me-1"></i> Triệu chứng ban
+                                            đầu:</strong>
+                                        <span id="patientSymptoms">Đang tải...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column gap-2">
+                                <button type="button" class="btn btn-outline-cyan btn-sm rounded-pill px-3"
+                                    data-bs-toggle="modal" data-bs-target="#patientProfileModal">
+                                    <i class="bi bi-person-vcard me-1"></i> Hồ sơ sức khỏe
+                                </button>
+
+                                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3"
+                                    data-bs-toggle="offcanvas" data-bs-target="#historyOffcanvas">
+                                    <i class="bi bi-clock-history me-1"></i> Lịch sử khám cũ
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Form Nhập liệu -->
+                <form id="examinationForm">
+                    <div class="row g-4">
+                        <!-- Cột Trái: Chẩn đoán -->
+                        <div class="col-lg-5">
+                            <div class="card border-0 shadow-sm rounded-4 h-100">
+                                <div class="card-header bg-white border-bottom p-4">
+                                    <h5 class="fw-bold mb-0"><i class="bi bi-clipboard2-pulse text-danger me-2"></i>Chẩn
+                                        đoán lâm sàng</h5>
+                                </div>
+                                <div class="card-body p-4">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-medium text-dark">Kết luận bệnh <span
+                                                class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="doctorDiagnosis" rows="3" required
+                                            placeholder="Ví dụ: Viêm họng cấp, sốt siêu vi..."></textarea>
+                                    </div>
+                                    <div class="mb-0">
+                                        <label class="form-label fw-medium text-dark">Lời khuyên / Ghi chú</label>
+                                        <textarea class="form-control" id="doctorNotes" rows="4"
+                                            placeholder="Ví dụ: Uống nhiều nước, kiêng đồ lạnh..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cột Phải: Kê đơn thuốc -->
+                        <div class="col-lg-7">
+                            <div class="card border-0 shadow-sm rounded-4 h-100">
+                                <div
+                                    class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center">
+                                    <h5 class="fw-bold mb-0"><i class="bi bi-capsule text-primary me-2"></i>Đơn thuốc
+                                    </h5>
+                                    <button id="addMedicineBtn" type="button" class="btn btn-sm btn-outline-cyan">
+                                        <i class="bi bi-plus-lg me-1"></i> Thêm thuốc
+                                    </button>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle mb-0" id="prescriptionTable">
+                                            <thead class="bg-light">
+                                                <tr>
+                                                    <th class="ps-4 text-muted fw-semibold" style="width: 40%">Tên thuốc
+                                                        <span class="text-danger">*</span>
+                                                    </th>
+                                                    <th class="text-muted fw-semibold" style="width: 20%">Số lượng <span
+                                                            class="text-danger">*</span></th>
+                                                    <th class="text-muted fw-semibold" style="width: 35%">Cách dùng</th>
+                                                    <th class="text-end pe-4" style="width: 5%"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="prescriptionBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="emptyPrescriptionMsg" class="text-center py-4 text-muted small d-none">
+                                        Chưa kê loại thuốc nào. Bấm "Thêm thuốc" để bắt đầu kê đơn.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Alert thông báo -->
+                    <div id="submitAlert" class="alert d-none mt-4" role="alert"></div>
+
+                    <!-- Submit -->
+                    <div class="d-flex justify-content-end gap-3 mt-4 mb-5">
+                        <button type="button" disabled class="btn btn-outline-secondary me-2"
+                            id="btn-print-prescription">
+                            <i class="bi bi-printer me-1"></i> In Đơn Thuốc (PDF)
+                        </button> <button type="submit" class="btn btn-cyan px-5 py-2 fw-medium shadow-lg"
+                            id="btnSubmitExam">
+                            <i class="bi bi-check2-circle me-1"></i>
+                            <span id="submitBtnLabel"> Hoàn tất khám</span>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </main>
+    </div>
+
+    <div class="modal fade" id="patientProfileModal" tabindex="-1" aria-labelledby="patientProfileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="patientProfileModalLabel"><i class="bi bi-person-vcard me-2"></i>Hồ sơ
+                        sức khỏe bệnh nhân</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="patientProfileContainer">
+                    <!-- Nội dung hồ sơ sức khỏe sẽ đổ vào đây -->
+                    <p>Đang tải dữ liệu hồ sơ...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="historyOffcanvas" style="width: 450px;">
+        <div class="offcanvas-header border-bottom bg-light">
+            <h5 class="offcanvas-title fw-bold">
+                <i class="bi bi-clock-history text-primary me-2"></i>Lịch sử khám bệnh
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body p-4" id="historyOffcanvasBody">
+
+        </div>
+    </div>
+
+    <!-- Modal Xem Chi Tiết Bệnh Án Cũ -->
+    <div class="modal fade" id="recordDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header bg-cyan text-white p-3">
+                    <h6 class="modal-title fw-bold" id="detailModalTitle">
+                        <i class="bi bi-journal-medical me-2"></i>Chi tiết bệnh án cũ
+                    </h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" id="recordDetailModalBody">
+
+                </div>
+                <div class="modal-footer bg-light border-0">
+                    <button type="button" class="btn btn-secondary btn-sm px-4" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/component.js"></script>
+    <script src="/assets/js/doctor-examination.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 </body>
 

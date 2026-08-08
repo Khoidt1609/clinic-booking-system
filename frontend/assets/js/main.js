@@ -107,3 +107,8 @@ function formatDateForInput(dateObj) {
   const day = String(dateObj.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
+
+function translateGender(g) {
+  return { MALE: "Nam", FEMALE: "Nữ", OTHER: "Khác" }[g] || "Chưa cập nhật";
+}
+

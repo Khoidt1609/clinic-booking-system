@@ -76,7 +76,7 @@ function renderSchedule(appointments, selectDate) {
             // }
         } else if (app.status === 'COMPLETED') {
             // Chuyển hướng sang trang xem Lịch sử bệnh án
-            actionBtn = `<a href="history.html?id=${app.appointmentId}" class="btn btn-sm btn-outline-info">
+            actionBtn = `<a href="examination.html?id=${app.appointmentId}" class="btn btn-sm btn-outline-cyan">
                             <i class="bi bi-eye me-1"></i> Xem bệnh án
                           </a>`;
         }

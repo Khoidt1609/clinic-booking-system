@@ -44,6 +44,17 @@ public class AppointmentController {
         
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        try {
+            AppointmentResponse response = appointmentService.getAppointmentById(id);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+    
+
     @GetMapping("/patient/{patientId}")
     public ResponseEntity<?> getPatientAppointments(@PathVariable("patientId") Long patientId) {
         try {

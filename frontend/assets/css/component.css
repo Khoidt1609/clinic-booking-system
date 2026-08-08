@@ -63,6 +63,22 @@
   border-color: var(--color-primary-dark);
 }
 
+.btn-delete-danger {
+  background-color: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.btn-delete-danger:hover,
+.btn-delete-danger:focus {
+  background-color: none;
+  color: red !important;
+  border: none;
+  font-weight: 900;
+}
+
 .btn-outline-danger {
   border-radius: var(--radius-sm);
 }
