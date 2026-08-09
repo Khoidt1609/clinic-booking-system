@@ -10,18 +10,18 @@ async function handleLogin(fromEvent) {
         const response = await apiFetch("auth/login", {
             method: "POST",
             body: {
-                email: email, 
+                email: email,
                 password: password
             }
         });
 
         saveSession(response);
 
-        if(response.role == "DOCTOR") {
-             window.location.href = "/doctor/dashboard.html";
+        if (response.role == "DOCTOR") {
+            window.location.href = "/doctor/dashboard.html";
         } else {
-             alert('🎉 Đăng nhập thành công!');
-            window.location.href = "/patient/booking.html";
+            alert('🎉 Đăng nhập thành công!');
+            window.location.href = "index.html";
         }
 
     } catch (error) {
@@ -53,7 +53,7 @@ async function handleRegister(fromEvent) {
         });
         saveSession(response);
 
-        window.location.href = "/patient/booking.html";
+        // window.location.href = "/index.html";
     } catch (error) {
         errorBox.textContent = error.message;
         errorBox.classList.remove("d-none");
@@ -61,8 +61,8 @@ async function handleRegister(fromEvent) {
 }
 
 //  xử lý ẩn/hiện mật khẩu áp dụng được cho nhiều ô input
-document.querySelectorAll('.toggle-password').forEach(button => {    
-    button.addEventListener('click', function() {
+document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', function () {
         const targetId = this.getAttribute('data-target');
         const input = document.getElementById(targetId);
         const icon = this.querySelector('i');

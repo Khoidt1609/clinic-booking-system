@@ -1,6 +1,18 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const user = requiredAuth("PATIENT");
-    if(!user) return;
+    if (!user) return;
+
+    // Kiểm tra xem có bị điền thông tin hay chưa trước khi đặt lịch
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('requireUpdate') === 'true') {
+        const alertBox = document.getElementById('alertBox');
+        if (alertBox) {
+            alertBox.className = "alert alert-warning fw-medium mb-4";
+            alertBox.innerHTML = "<i class='bi bi-exclamation-triangle-fill me-2'></i> Bạn cần cập nhật đầy đủ thông tin cá nhân (SĐT, Ngày sinh, Địa chỉ) trước khi đặt lịch khám.";
+            alertBox.classList.remove('d-none');
+        }
+    }
+
     await loadProfile(user.id);
 
     document.getElementById("btnSave").addEventListener("click", submitProfile);
@@ -19,8 +31,8 @@ async function loadProfile(patientId) {
         document.getElementById("address").value = profile.address || "";
         document.getElementById("allergies").value = profile.allergies || "";
         document.getElementById("medicalHistory").value = profile.medicalHistory || "";
-        
-        const genderValue = profile.gender || ""; 
+
+        const genderValue = profile.gender || "";
         if (genderValue) {
             // Tìm nút radio có thuộc tính value trùng với giá trị từ API
             const radioBtn = document.querySelector(`input[name="gender"][value="${genderValue}"]`);
@@ -43,13 +55,15 @@ async function submitProfile(event) {
 
     const errorBox = document.getElementById("profileError");
     const successBox = document.getElementById("profileSuccess");
+    successBox.className = "alert alert-success fw-medium mb-4";
     errorBox.classList.add("d-none");
     successBox.classList.add("d-none");
 
     const btnSave = document.getElementById('btnSave');
     btnSave.disabled = true;
-    btnSave.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Đang lưu...';
+    const originalText = btnSave.innerHTML;
 
+    btnSave.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Đang lưu...';
     const checkedGender = document.querySelector(`input[name=gender]:checked`);
 
     try {
@@ -70,9 +84,9 @@ async function submitProfile(event) {
     } catch (error) {
         errorBox.textContent = error.message;
         errorBox.classList.remove("d-none");
-    }finally {
+    } finally {
         btnSave.disabled = false;
-        btnSave.innerHTML = 'Lưu thay đổi'; // Hoặc nội dung gốc của nút
+        btnSave.innerHTML = originalText;
     }
 }
 

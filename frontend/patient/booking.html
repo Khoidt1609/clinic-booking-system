@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đặt lịch khám - Phòng khám Đa khoa</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt lịch khám - Phòng khám Đa khoa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <!-- Nhúng Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Nhúng Bootstrap Icons -->
@@ -15,13 +16,15 @@
     <link rel="stylesheet" href="/assets/css/component.css">
 
 </head>
+
 <body>
 
-   
-  <nav class="navbar app-navbar navbar-expand-lg py-3" id="mainNav">
+
+    <nav class="navbar app-navbar navbar-expand-lg py-3" id="mainNav">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="/index.html">
-                <div class="bg-cyan text-white rounded d-flex align-items-center justify-center p-1" style="width: 32px; height: 32px;">
+                <div class="bg-cyan text-white rounded d-flex align-items-center justify-center p-1"
+                    style="width: 32px; height: 32px;">
                     <i class="bi bi-hospital fs-6 ms-1"></i>
                 </div>
                 Phòng khám Nhẫn Tâm
@@ -36,59 +39,67 @@
                     <a href="profile.html" class="nav-link d-inline active">Hồ sơ sức khỏe</a>
                     <a href="medical-history.html" class="nav-link d-inline active">Lịch sử khám</a>
                 </ul>
-                 <div class="d-flex w-sm-100 w-lg-auto  gap-2" id="authNavArea">
-                    <a href="/patient/login.html" class="btn btn-light fw-medium text-dark border flex-fill w-lg-auto">Đăng nhập</a>
-                    <a href="/patient/login.html" class="btn btn-cyan fw-medium shadow-sm flex-fill w-lg-auto">Đặt lịch ngay</a>
+                <div class="d-flex w-sm-100 w-lg-auto  gap-2" id="authNavArea">
+                    <a href="/patient/login.html"
+                        class="btn btn-light fw-medium text-dark border flex-fill w-lg-auto">Đăng nhập</a>
+                    <a href="/patient/login.html" class="btn btn-cyan fw-medium shadow-sm flex-fill w-lg-auto">Đặt lịch
+                        ngay</a>
                 </div>
             </div>
         </div>
     </nav>
 
-<div class="page-container">
-    <div class="mb-4">
-        <h4 class="fw-bold mb-1" style="font-family: 'Plus Jakarta Sans', sans-serif;">Đặt lịch khám</h4>
-        <p class="text-muted mb-0">Chọn ngày và giờ phù hợp với bạn</p>
-    </div>
-    <div class="app-card p-4 mb-4 bg-white rounded-3 shadow-sm border border-light-subtle">
-        <div class="mb-0" style="max-width: 280px;">
-            <label for="appointmentDate" class="form-label fw-medium text-secondary small">Ngày khám</label>
-            <input type="date" class="form-control py-2" id="appointmentDate">
+    <div class="page-container">
+        <div class="mb-4">
+            <h4 class="fw-bold mb-1" style="font-family: 'Plus Jakarta Sans', sans-serif;">Đặt lịch khám</h4>
+            <p class="text-muted mb-0">Chọn ngày và giờ phù hợp với bạn</p>
         </div>
-    </div>
-    <div class="app-card p-4 mb-4 bg-white rounded-3 shadow-sm border border-light-subtle">
-        <div id="slotContainer">
-            <p class="text-muted">Đang tải khung giờ...</p>
+        <div class="app-card p-4 mb-4 bg-white rounded-3 shadow-sm border border-light-subtle">
+            <div class="mb-0" style="max-width: 280px;">
+                <label for="appointmentDate" class="form-label fw-medium text-secondary small">Ngày khám</label>
+                <input type="date" class="form-control py-2" id="appointmentDate">
+            </div>
         </div>
-        
-        <!-- Chú thích trạng thái màu sắc  -->
-        <div class="d-flex gap-3 mt-4 pt-3 border-top border-light-subtle small text-secondary align-items-center">
-            <span class="d-flex align-items-center gap-1"><i class="bi bi-square rounded-circle text-dark"></i> Còn trống</span>
-            <span class="d-flex align-items-center gap-1"><i class="bi bi-square-fill rounded-circle text-secondary opacity-15"></i> Đã đặt</span>
-            <span class="d-flex align-items-center gap-1"><i class="bi bi-square-fill rounded text-cyan"></i> Đang chọn</span>
+        <div class="app-card p-4 mb-4 bg-white rounded-3 shadow-sm border border-light-subtle">
+            <div id="slotContainer">
+                <p class="text-muted">Đang tải khung giờ...</p>
+            </div>
+
+            <!-- Chú thích trạng thái màu sắc  -->
+            <div class="d-flex gap-3 mt-4 pt-3 border-top border-light-subtle small text-secondary align-items-center">
+                <span class="d-flex align-items-center gap-1"><i class="bi bi-square rounded-circle text-dark"></i> Còn
+                    trống</span>
+                <span class="d-flex align-items-center gap-1"><i
+                        class="bi bi-square-fill rounded-circle text-secondary opacity-15"></i> Đã đặt</span>
+                <span class="d-flex align-items-center gap-1"><i class="bi bi-square-fill rounded text-cyan"></i> Đang
+                    chọn</span>
+            </div>
         </div>
-    </div>
-    <div class="app-card p-4 bg-white rounded-3 shadow-sm border border-light-subtle">
-        <div class="mb-3">
-            <label for="symptoms" class="form-label fw-medium text-secondary small">Triệu chứng / Lý do khám (Nếu có)</label>
-            <textarea class="form-control p-3" id="symptoms" rows="3" placeholder="Mô tả triệu chứng hoặc lý do bạn muốn khám..."></textarea>
+        <div class="app-card p-4 bg-white rounded-3 shadow-sm border border-light-subtle">
+            <div class="mb-3">
+                <label for="symptoms" class="form-label fw-medium text-secondary small">Triệu chứng / Lý do khám (Nếu
+                    có)</label>
+                <textarea class="form-control p-3" id="symptoms" rows="3"
+                    placeholder="Mô tả triệu chứng hoặc lý do bạn muốn khám..."></textarea>
+            </div>
+
+            <!-- hiển thị thông báo lỗi nếu có -->
+            <div id="bookingError" class="alert alert-danger mt-3 d-none"></div>
+
+            <!-- Dòng hiển thị thông tin giờ đã chọn ở ngay trên nút bấm -->
+            <div class="my-3">
+                <span class="fw-medium text-dark d-none" id="info"></span>
+            </div>
+
+            <button id="confirmBtn" class="btn btn-cyan mt-1 mb-4 rounded-3" disabled>Xác nhận đặt lịch</button>
         </div>
 
-        <!-- hiển thị thông báo lỗi nếu có -->
-        <div id="bookingError" class="alert alert-danger mt-3 d-none"></div>
-
-        <!-- Dòng hiển thị thông tin giờ đã chọn ở ngay trên nút bấm -->
-        <div class="my-3">
-            <span class="fw-medium text-dark d-none" id="info"></span>
-        </div>
-
-        <button id="confirmBtn" class="btn btn-cyan mt-1 mb-4 rounded-3" disabled>Xác nhận đặt lịch</button>
     </div>
-
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/js/api.js"></script>
-<script src="/assets/js/patient.js"></script>
-<script src="/assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/patient-booking.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 </body>
+
 </html>

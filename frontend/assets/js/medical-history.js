@@ -82,7 +82,7 @@ function renderMedicalHistory(records) {
                                 ${medicalRows}
                             </tbody>
                         </table>
-                        <a href="../print-prescription.html?appointmentId=${record.appointmentId}"
+                        <a href="/doctor/print-prescription.html?appointmentId=${record.appointmentId}"
                             target="_blank" class="btn btn-outline-cyan btn-sm p-2">
                             <i class="bi bi-printer"></i> Xem / In đơn thuốc
                         </a>

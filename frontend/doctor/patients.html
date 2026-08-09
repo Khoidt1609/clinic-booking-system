@@ -16,14 +16,13 @@
 </head>
 
 <body>
-    <div class="admin-layout">
-
+    <div class="doctor-layout">
+        <div id="sidebarContainer"></div>
         <!-- NỘI DUNG CHÍNH (MASTER - DETAIL) -->
         <main class="main-content bg-light p-4">
 
             <div class="master-detail-container">
-
-                <!-- CỘT TRÁI: DANH SÁCH BỆNH NHÂN -->
+                <!-- Danh sách bệnh nhân -->
                 <div class="master-list">
                     <div class="p-3 border-bottom bg-white z-1">
                         <h5 class="fw-bold mb-3">Tra cứu bệnh nhân</h5>
@@ -44,7 +43,7 @@
                     </div>
                 </div>
 
-                <!-- CỘT PHẢI: CHI TIẾT HỒ SƠ -->
+                <!-- Chi tiết hồ sơ -->
                 <div class="detail-view">
                     <!-- Trạng thái trống khi chưa chọn ai -->
                     <div id="emptyDetailState"
@@ -59,16 +58,12 @@
 
                         <!-- Khối 1: Thông tin hành chính & Y tế cơ bản -->
                         <div class="d-flex align-items-start gap-4 mb-4 pb-4 border-bottom">
-                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fs-2"
-                                style="width: 80px; height: 80px; flex-shrink: 0;" id="detailAvatar">
-                                <!-- Ký tự đầu của tên -->
-                            </div>
+
                             <div class="w-100">
-                                <h4 class="fw-bold mb-1 text-dark" id="detailName">Tên Bệnh Nhân</h4>
-                                <p class="text-muted small mb-3">Mã BN: <span id="detailCode"
-                                        class="fw-medium text-dark">---</span></p>
 
                                 <div class="row g-3 bg-white p-3 rounded-3 border shadow-sm small">
+                                    <h4 class="fw-bold mb-1 text-dark" id="detailName">Tên Bệnh Nhân</h4>
+
                                     <div class="col-md-4">
                                         <span class="text-muted d-block mb-1">Ngày sinh</span>
                                         <strong id="detailDob">---</strong>
@@ -89,21 +84,28 @@
                                         <span class="text-muted d-block mb-1">Địa chỉ</span>
                                         <strong id="detailAddress">---</strong>
                                     </div>
-                                    <div class="col-12 border-top pt-2 mt-2">
-                                        <span class="text-muted fw-bold d-block mb-1 text-uppercase"
-                                            style="font-size: 0.75rem;">Tiền sử bệnh & Dị ứng</span>
+                                    <div class="col-12 d-flex border-top pt-2 mt-2">
+                                        <span class="text-muted fw-bold d-block  me-2 ">Dị
+                                            ứng:</span>
                                         <div id="detailAllergies" class="text-dark">---</div>
+
+                                    </div>
+                                    <div class="col-12 d-flex  mt-2">
+                                        <span class="text-muted fw-bold d-block mb-1 me-2">Tiền
+                                            sử bệnh:</span>
+                                        <div id="detailMedicalHistory" class="text-dark">---</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Khối 2: Lịch sử khám (Timeline) -->
-                        <h5 class="fw-bold mb-4 text-dark"><i class="bi bi-clock-history text-primary me-2"></i>Lịch sử
+                        <!-- Lịch sử khám (Timeline) -->
+                        <h5 class="fw-bold mb-4 text-dark"><i class="bi bi-clock-history text-secondary me-2"></i>Lịch
+                            sử
                             khám bệnh</h5>
 
                         <div class="timeline" id="medicalHistoryTimeline">
-                            <!-- JS sẽ render lịch sử khám vào đây -->
+
                         </div>
                     </div>
 
@@ -127,6 +129,13 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/component.js"></script>
+    <script src="/assets/js/doctor-patient.js"></script>
+    <script src="/assets/js/main.js"></script>
+
 </body>
 
 </html>

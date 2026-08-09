@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const user = requiredAuth("PATIENT");
     if (!user) return;
 
+    const isProfileComplete = await checkProfileStatus(user.id);
+    if (!isProfileComplete) {
+        window.location.href = "profile.html?requireUpdate=true";
+        return;
+    }
+
     const doctor = await getDoctor();
     currentDoctorId = doctor.id;
 
@@ -128,6 +134,19 @@ async function submitBooking() {
         errorBox.textContent = error.message;
         errorBox.classList.remove("d-none");
     }
+}
 
+async function checkProfileStatus(patientId) {
+    try {
+        const profile = await apiFetch(`profiles/${patientId}`);
+
+        if (!profile.dateOfBirth || !profile.address || !profile.gender) {
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        return false;
+    }
 }
 
