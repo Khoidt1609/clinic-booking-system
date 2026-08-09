@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.clinic.booking.entity.User;
 import com.clinic.booking.enums.Role;
@@ -20,5 +22,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     //  lấy bác sĩ đầu tiên 
     Optional<User> findFirstByRole(Role role);
+
+    // Tìm kiếm patient dựa trên keyword
+    @Query("SELECT u FROM USER WHERE u.role = :role AND "
+        + "LOWER(u.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR u.phone LIKE(CONCAT('%', :keyword, '%'))")
+    List<User> searchPatients(@Param("keyword") String keyword);
 
 }
