@@ -24,8 +24,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findFirstByRole(Role role);
 
     // Tìm kiếm patient dựa trên keyword
-    @Query("SELECT u FROM USER WHERE u.role = :role AND "
-        + "LOWER(u.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR u.phone LIKE(CONCAT('%', :keyword, '%'))")
-    List<User> searchPatients(@Param("keyword") String keyword);
+    @Query("SELECT u FROM User u WHERE u.role = :role AND "
+        + "(LOWER(u.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR u.phone LIKE CONCAT('%', :keyword, '%'))")
+    List<User> searchPatients(@Param("keyword") String keyword, @Param("role") Role role);
 
 }

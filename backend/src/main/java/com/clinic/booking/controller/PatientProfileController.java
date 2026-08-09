@@ -50,7 +50,7 @@ public class PatientProfileController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchPatients(@RequestParam String keyword) {
+    public ResponseEntity<?> searchPatients(@RequestParam(required = false, defaultValue = "") String keyword) {
         try {
             List<PatientSummaryResponse> responses = patientProfileService.searchPatients(keyword);
             return ResponseEntity.ok(responses);

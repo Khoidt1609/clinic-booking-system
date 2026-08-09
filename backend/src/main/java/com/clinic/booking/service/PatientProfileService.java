@@ -3,8 +3,6 @@ package com.clinic.booking.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.stereotype.Service;
 
 import com.clinic.booking.dto.PatientSummaryResponse;
@@ -59,7 +57,7 @@ public class PatientProfileService {
         if(user.getRole() != Role.DOCTOR) {
             throw new RuntimeException("Bạn không có quyền truy cập chức năng này");
         }
-        List<User> patients = userRepository.searchPatients(keyword);
+        List<User> patients = userRepository.searchPatients(keyword, Role.PATIENT);
         List<PatientSummaryResponse> responses = new ArrayList<>();
         for(User patient : patients) {
             PatientProfile profile = patientProfileRepository.findByUserId(patient.getId()).orElse(null);
@@ -67,8 +65,8 @@ public class PatientProfileService {
                                                 .patientId(patient.getId())
                                                 .fullName(patient.getFullName())
                                                 .phone(patient.getPhone())
-                                                .dateOfBirth(profile.getDateOfBirth())
-                                                .gender(profile.getGender() != null ? profile.getGender().toString() : null)
+                                                .dateOfBirth(profile != null &&  profile != null ? profile.getDateOfBirth() : null)
+                                                .gender(profile != null && profile.getGender() != null ? profile.getGender().toString() : null)
                                                 .build();
             responses.add(response);
         };
