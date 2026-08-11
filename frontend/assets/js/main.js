@@ -54,13 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderAuthNav(containerId = "authNavArea") {
   const container = document.getElementById(containerId);
   if (!container) return;
-
+  const isSubFolder = window.location.pathname.includes('/patient/') || window.location.pathname.includes('/doctor/');
+  const prefix = isSubFolder ? "../" : "./"; // Nếu ở index, prefix sẽ là ./
   const user = getCurrentUser();
 
   if (user) {
+
     const dashboardUrl = user.role === "DOCTOR"
-      ? "doctor/dashboard.html"
-      : "patient/book-appointment.html";
+      ? `${prefix}doctor/dashboard.html`
+      : `${prefix}patient/book-appointment.html`;
 
     container.innerHTML = `
       <div class="dropdown">
@@ -78,10 +80,36 @@ function renderAuthNav(containerId = "authNavArea") {
     `;
   } else {
     container.innerHTML = `
-      <a href="patient/login.html" class="btn btn-light fw-medium text-dark border">Đăng nhập</a>
-      <a href="patient/register.html" class="btn btn-cyan fw-medium shadow-sm">Đặt lịch ngay</a>
+      <a href="${prefix}patient/login.html" class="btn btn-light fw-medium text-dark border">Đăng nhập</a>
+      <a href="${prefix}patient/register.html" class="btn btn-cyan fw-medium shadow-sm">Đặt lịch ngay</a>
     `;
   }
+}
+
+function showToast(message, type = "success") {
+  let container = document.getElementById("toastContainer");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "toastContainer";
+    container.className = container.className = "toast-container position-fixed bottom-0 end-0 p-3";
+    container.style.zIndex = "1080";
+    document.body.appendChild(container);
+  }
+
+  const toastEl = document.createElement("div");
+  toastEl.className = `toast align-items-center text-white bg-${type} border-0`;
+  toastEl.setAttribute("role", alert);
+  toastEl.innerHTML = `
+    <div class="d-flex">
+      <div class="toast-body">${message}</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>`;
+  container.appendChild(toastEl);
+
+  const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+  toast.show();
+
+  toastEl.addEventListener("hidden.bs.toast", () => toastEl.remove());
 }
 
 const statusMap = {
@@ -97,8 +125,9 @@ function getStatusBadgeHtml(status) {
 
 
 function formatDateForView(isoDate) {
-  const [year, month, day] = isoDate.split("-");
-  return `${day}/${month}/${year}`;
+  if (!isoDate) return "Chưa cập nhật";
+  const [y, m, d] = isoDate.split("-");
+  return `${d}/${m}/${y}`;
 }
 
 function formatDateForInput(dateObj) {

@@ -21,7 +21,7 @@ async function loadPrescriptionData(appointmentId) {
         console.log(appointment)
 
         if (!record) {
-            alert("Ca khám này chưa có bệnh án hoặc chưa có bệnh án");
+            showToast("Ca khám này chưa có bệnh án hoặc chưa có bệnh án", "warning");
             return;
         }
 

@@ -125,3 +125,7 @@
   color: var(--color-primary-dark);
   font-weight: 600;
 }
+
+.was-validated .form-check-input:invalid~.invalid-feedback {
+  display: block;
+}

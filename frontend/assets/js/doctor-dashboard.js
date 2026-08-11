@@ -39,7 +39,7 @@ async function loadDoctorAppointments(doctorId, date) {
         renderSchedule(appointments, date);
         updateStats(appointments);
     } catch (error) {
-        alert("Lỗi khi tải lịch khám: " + error.message);
+        showToast("Lỗi khi tải lịch khám: " + error.message, "danger");
     } finally {
         loading.classList.add('d-none');
     }

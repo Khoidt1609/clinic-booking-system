@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Kiểm tra xem có bị điền thông tin hay chưa trước khi đặt lịch
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('requireUpdate') === 'true') {
-        const alertBox = document.getElementById('alertBox');
+        const alertBox = document.getElementById('profileSuccess');
         if (alertBox) {
             alertBox.className = "alert alert-warning fw-medium mb-4";
             alertBox.innerHTML = "<i class='bi bi-exclamation-triangle-fill me-2'></i> Bạn cần cập nhật đầy đủ thông tin cá nhân (SĐT, Ngày sinh, Địa chỉ) trước khi đặt lịch khám.";
@@ -53,9 +53,17 @@ async function loadProfile(patientId) {
 async function submitProfile(event) {
     event.preventDefault();
 
+    const form = document.getElementById("profileForm");
     const errorBox = document.getElementById("profileError");
     const successBox = document.getElementById("profileSuccess");
-    successBox.className = "alert alert-success fw-medium mb-4";
+
+    if (!form.checkValidity()) {
+        event.stopPropagation();
+        form.classList.add('was-validated'); // Hiện tất cả viền đỏ và câu báo lỗi
+        return;
+    }
+    form.classList.remove("was-validated");
+    // successBox.className = "alert alert-success fw-medium mb-4";
     errorBox.classList.add("d-none");
     successBox.classList.add("d-none");
 
@@ -65,6 +73,7 @@ async function submitProfile(event) {
 
     btnSave.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Đang lưu...';
     const checkedGender = document.querySelector(`input[name=gender]:checked`);
+
 
     try {
         const response = await apiFetch("profiles/profile", {
@@ -79,10 +88,13 @@ async function submitProfile(event) {
             }
         });
 
-        successBox.textContent = response.message;
-        successBox.classList.remove("d-none");
+        showToast(response.message);
+
+        // successBox.textContent = response.message;
+        // successBox.classList.remove("d-none");
     } catch (error) {
         errorBox.textContent = error.message;
+        console.log(error);
         errorBox.classList.remove("d-none");
     } finally {
         btnSave.disabled = false;

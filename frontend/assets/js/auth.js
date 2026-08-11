@@ -18,10 +18,13 @@ async function handleLogin(fromEvent) {
         saveSession(response);
 
         if (response.role == "DOCTOR") {
-            window.location.href = "/doctor/dashboard.html";
+            showToast('Đăng nhập thành công với vai trò bác sĩ!');
+            setTimeout(() => window.location.href = "/doctor/dashboard.html", 1200);
+
+
         } else {
-            alert('🎉 Đăng nhập thành công!');
-            window.location.href = "index.html";
+            showToast('Đăng nhập thành công!');
+            setTimeout(() => window.location.href = "/index.html", 1200);
         }
 
     } catch (error) {
@@ -52,7 +55,8 @@ async function handleRegister(fromEvent) {
             }
         });
         saveSession(response);
-
+        showToast('Đăng ký thành công!');
+        setTimeout(() => window.location.href = "/patient/login.html", 1200);
         // window.location.href = "/index.html";
     } catch (error) {
         errorBox.textContent = error.message;

@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const examForm = document.getElementById('examinationForm');
     console.log(urlParams)
     if (!appointmentId) {
-        alert("Không tìm thấy thông tin ca khám!");
+        showToast("Không tìm thấy thông tin ca khám!", "danger");
         window.location.href = 'dashboard.html';
         return;
     };
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const printUrl = `/doctor/print-prescription.html?appointmentId=${currentAppointment.appointmentId}`;
                 window.open(printUrl, '_blank');
             } else {
-                alert("Không tìm thấy mã lịch hẹn để in đơn thuốc!");
+                showToast("Không tìm thấy mã lịch hẹn để in đơn thuốc!", "danger");
             }
         });
     }

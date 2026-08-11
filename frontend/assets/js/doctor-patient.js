@@ -52,7 +52,7 @@ async function selectPatient(patientId, element) {
 
     document.getElementById("emptyDetailState").classList.add("d-none");
     const detailContainer = document.getElementById("patientDetailContent");
-    console.log(detailContainer)
+    // console.log(detailContainer)
     detailContainer.classList.remove("d-none");
 
     try {
@@ -61,15 +61,20 @@ async function selectPatient(patientId, element) {
             apiFetch(`medical-records/patient/${patientId}`)
         ]);
         renderPatientDetail(profile, record);
+        console.log(profile)
+        console.log(record)
+
     } catch (error) {
-        detailContainer.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
+        showToast("Lỗi tải hồ sơ: " + error.message, "danger");
+        detailContainer.classList.add("d-none");
+        document.getElementById("emptyDetailState").classList.remove("d-none");
     }
 }
 
 function renderPatientDetail(profile, records) {
     const detailContainer = document.getElementById("patientDetailContent");
     document.getElementById("detailName").textContent = profile.fullName;
-    document.getElementById("detailDob").textContent = formatDateForView(profile.dateOfBirth);
+    document.getElementById("detailDob").textContent = formatDateForView(profile.dateOfBirth) || "";
 
     document.getElementById("detailGender").textContent = profile.gender === 'MALE' ? 'Nam' : (profile.gender === 'FEMALE' ? 'Nữ' : 'Khác');
     document.getElementById("detailBlood").textContent = profile.bloodType || "Chưa xét nghiệm";

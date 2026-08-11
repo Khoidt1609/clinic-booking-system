@@ -15,11 +15,56 @@
 .service-card {
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
+
 .service-card:hover {
   border-color: var(--color-primary) !important;
   box-shadow: var(--shadow-soft);
 }
 
+.cta-section {
+  /* Sử dụng màu Cyan chủ đạo từ biến hệ thống của bạn */
+  background-color: var(--color-primary);
+  /* margin: 0 1.25rem 3rem 1.25rem; */
+  /* Cách lề ngoài để tạo khoảng thở */
+}
+
+/* Giới hạn độ rộng phụ đề giúp phân bổ chữ cân đối */
+.cta-desc {
+  max-width: 650px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Nút màu trắng có chữ màu Cyan đặc trưng */
+.btn-cta-white {
+  background-color: var(--color-surface);
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-surface);
+  border-radius: 999px;
+  /* Định dạng bo tròn viên thuốc */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hiệu ứng rê chuột cho nút trắng */
+.btn-cta-white:hover,
+.btn-cta-white:focus {
+  background-color: var(--color-primary-tint);
+  border-color: var(--color-primary-tint);
+  transform: translateY(-2px);
+}
+
+/* Hiệu ứng rê chuột cho nút viền trắng */
+.cta-section .btn-outline-light {
+  border-radius: 999px;
+  /* Đồng bộ viên thuốc */
+  transition: all 0.2s ease-in-out;
+}
+
+.cta-section .btn-outline-light:hover,
+.cta-section .btn-outline-light:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
 
 
 /* SLOT PICKER - điểm nhấn chính của app (trang đặt lịch) */
@@ -49,15 +94,18 @@
   cursor: pointer;
   transition: all 0.15s ease;
 }
+
 .slot-chip:hover:not(.slot-chip--disabled) {
   border-color: var(--color-primary);
   background-color: var(--color-primary-tint);
 }
+
 .slot-chip--selected {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   color: white;
 }
+
 .slot-chip--disabled {
   background-color: #f1f1ef;
   color: #b5bdba;
@@ -81,6 +129,7 @@
   padding: 1.5rem;
   height: 100%;
 }
+
 .why-us-tile .check-icon {
   width: 40px;
   height: 40px;
@@ -90,14 +139,42 @@
   justify-content: center;
   margin-bottom: 1rem;
 }
-.tile-teal   { background: var(--color-primary-tint); }
-.tile-teal   .check-icon { background: #CDEAE4; color: var(--color-primary-dark); }
-.tile-mint   { background: #E9F6EE; }
-.tile-mint   .check-icon { background: #CFEBD9; color: #1F7A4D; }
-.tile-sky    { background: #EAF3FB; }
-.tile-sky    .check-icon { background: #D2E6F7; color: #1B5A8A; }
-.tile-indigo { background: #EEEDFA; }
-.tile-indigo .check-icon { background: #DAD7F2; color: #4B3F9E; }
+
+.tile-teal {
+  background: var(--color-primary-tint);
+}
+
+.tile-teal .check-icon {
+  background: #CDEAE4;
+  color: var(--color-primary-dark);
+}
+
+.tile-mint {
+  background: #E9F6EE;
+}
+
+.tile-mint .check-icon {
+  background: #CFEBD9;
+  color: #1F7A4D;
+}
+
+.tile-sky {
+  background: #EAF3FB;
+}
+
+.tile-sky .check-icon {
+  background: #D2E6F7;
+  color: #1B5A8A;
+}
+
+.tile-indigo {
+  background: #EEEDFA;
+}
+
+.tile-indigo .check-icon {
+  background: #DAD7F2;
+  color: #4B3F9E;
+}
 
 /* ============================================================
    RESPONSIVE - Mobile & iPad
@@ -111,12 +188,31 @@
 
 /* Điện thoại (< 576px): ẩn thẻ nổi "Đặt lịch thành công" để tránh đè lên ảnh quá chật */
 @media (max-width: 575.98px) {
-  .hero-floating-card { display: none; }
-  .hero-section { min-height: auto; }
+  .hero-floating-card {
+    display: none;
+  }
+
+  .hero-section {
+    min-height: auto;
+  }
 }
 
 /* Tablet / iPad portrait (576px - 991px): thu nhỏ khoảng đệm, ảnh hero thấp lại */
 @media (min-width: 576px) and (max-width: 991.98px) {
-  .hero-section img { max-height: 380px; }
-  .hero-section { padding-top: 1rem !important; }
+  .hero-section img {
+    max-height: 380px;
+  }
+
+  .hero-section {
+    padding-top: 1rem !important;
+  }
+}
+
+
+/* Tối ưu hiển thị Responsive trên thiết bị di động cực nhỏ */
+@media (max-width: 575.98px) {
+  .cta-section {
+    margin: 0 0.75rem 2rem 0.75rem;
+    padding: 2.5rem 1rem !important;
+  }
 }

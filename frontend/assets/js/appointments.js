@@ -13,7 +13,7 @@ async function loadAppointments(patientId) {
         renderAppointments(appointments);
 
     } catch (error) {
-        alert("Không thể tải danh sách lịch hẹn: " + error.message);
+        showToast("Không thể tải danh sách lịch hẹn: " + error.message, "danger");
         document.getElementById('loadingIndicator').innerHTML = '<span class="text-danger">Lỗi tải dữ liệu.</span>';
 
     }
@@ -80,7 +80,7 @@ async function cancelAppointment(appointmentId) {
         document.getElementById("loadingIndicator").classList.remove("d-none");
         await loadAppointments(user.id);
     } catch (error) {
-        alert(error.message);
+        showToast(error.message, "danger");
     }
 }
 

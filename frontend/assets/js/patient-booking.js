@@ -128,7 +128,7 @@ async function submitBooking() {
                 patientSymptoms: symptoms
             }
         });
-        alert("Đặt lịch khám thành công!");
+        showToast("Đặt lịch khám thành công!");
         // window.location.href = "appointments.html";
     } catch (error) {
         errorBox.textContent = error.message;

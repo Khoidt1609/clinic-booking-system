@@ -14,10 +14,10 @@ async function apiFetch(path, options = {}) {
         ...(options.headers || {})
     }
 
-    if(token) {
+    if (token) {
         headers["Authorization"] = "Bearer " + token;
     }
-    
+
     const response = await fetch(API_BASE_URL + path, {
         ...options,
         headers,
@@ -25,8 +25,8 @@ async function apiFetch(path, options = {}) {
     });
 
     // Token hết hạn hoặc không hợp lệ  tự động đăng xuất, về lại trang login
-    if(response.status == 401) {
-        alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
+    if (response.status == 401) {
+        showToast("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!", "warning");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         window.location.href = "../patient/login.html"
@@ -66,22 +66,22 @@ function getCurrentUser() {
 function requiredAuth(expectedRole) {
     const user = getCurrentUser();
 
-    if(!user) {
+    if (!user) {
         window.location.href = "/patient/login.html";
         return null;
     }
 
     if (expectedRole && user.role !== expectedRole) {
-        alert("Bạn không có quyền truy cập trang này");
+        showToast("Bạn không có quyền truy cập trang này", "danger");
         window.location.href = expectedRole === "DOCTOR" ? "/patient/login.html" : "/doctor/login.html";
         return null;
     }
-  return user;
+    return user;
 }
 
 let _cachedDoctor = null;
 async function getDoctor() {
-    if(_cachedDoctor) {return _cachedDoctor;}
+    if (_cachedDoctor) { return _cachedDoctor; }
     _cachedDoctor = await apiFetch("doctors/default");
 
     return _cachedDoctor;
