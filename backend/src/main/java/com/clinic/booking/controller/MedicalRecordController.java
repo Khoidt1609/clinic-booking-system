@@ -11,6 +11,7 @@ import com.clinic.booking.dto.MedicalRecordRequest;
 import com.clinic.booking.dto.MedicalRecordResponse;
 import com.clinic.booking.service.MedicalRecordService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,17 +29,13 @@ public class MedicalRecordController {
     private final MedicalRecordService medicalRecordService;
 
     @PostMapping()
-    public ResponseEntity<?> createMedicalRecord(@RequestBody MedicalRecordRequest request) {
-        try {
+    public ResponseEntity<?> createMedicalRecord(@Valid @RequestBody MedicalRecordRequest request) {
             MedicalRecordResponse response = medicalRecordService.createMedicalRecord(request);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateMedicalRecord(@PathVariable("id") Long recordId, @RequestBody MedicalRecordRequest request) {
+    public ResponseEntity<?> updateMedicalRecord(@PathVariable("id") Long recordId, @Valid @RequestBody MedicalRecordRequest request) {
        try {
             MedicalRecordResponse response = medicalRecordService.updateMedicalRecord(recordId, request);
             return ResponseEntity.ok(response);

@@ -40,7 +40,7 @@ public class MedicalRecordService {
         if (appointment.getStatus() == AppointmentStatus.CANCELLED) {
             throw new RuntimeException("Không thể tạo bệnh án cho lịch hẹn đã bị hủy");
         }
-       
+
         MedicalRecord medicalRecord = MedicalRecord.builder()
                                         .appointment(appointment)
                                         .doctorDiagnosis(request.getDoctorDiagnosis())
@@ -104,7 +104,12 @@ public class MedicalRecordService {
     //Hàm gán danh sách đơn thuốc vào bệnh 
     private void attachPrescriptionItems(MedicalRecord medicalRecord, List<PrescriptionItemDTO> items) {
         if(items == null || items.isEmpty()) { return; }
+       
         for(PrescriptionItemDTO item : items ) {
+            // if (item.getQuantity() == null || item.getQuantity() < 1) {
+            //         // Ném ra ngoại lệ để Controller bắt được trong khối catch
+            //         throw new RuntimeException("Số lượng thuốc phải lớn hơn 0");
+            //     }
             PrescriptionItem i = PrescriptionItem.builder()
                                     .medicalRecord(medicalRecord)
                                     .medicineName(item.getMedicineName())

@@ -20,7 +20,7 @@ public class TimeSlotService {
     private final AppointmentRepository appointmentRepository;
 
     // Hiện tại là 1 doctor
-    public List<TimeSlotResponse>   getSlotByDoctorAndDate(Long doctorId, LocalDate date) {
+    public List<TimeSlotResponse> getSlotByDoctorAndDate(Long doctorId, LocalDate date) {
         List<TimeSlot> allSlots = timeSlotRepository.findAll();
         List<Long> bookedSlotIds = appointmentRepository.findBookedSlotIdsByDate(doctorId, date);
 
