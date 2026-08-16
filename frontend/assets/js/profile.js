@@ -56,6 +56,7 @@ async function submitProfile(event) {
     const form = document.getElementById("profileForm");
     const errorBox = document.getElementById("profileError");
     const successBox = document.getElementById("profileSuccess");
+    const dob = document.getElementById("dateOfBirth").value;
 
     if (!form.checkValidity()) {
         event.stopPropagation();
@@ -66,6 +67,14 @@ async function submitProfile(event) {
     // successBox.className = "alert alert-success fw-medium mb-4";
     errorBox.classList.add("d-none");
     successBox.classList.add("d-none");
+    if (dob) {
+        const selectedDate = new Date(dob);
+        const today = new Date();
+        if (selectedDate > today) {
+            showToast("Ngày sinh không thể nằm ở tương lai!", "danger");
+            return;
+        }
+    }
 
     const btnSave = document.getElementById('btnSave');
     btnSave.disabled = true;

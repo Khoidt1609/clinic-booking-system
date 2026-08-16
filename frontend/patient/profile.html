@@ -19,34 +19,8 @@
 </head>
 
 <body>
-    <nav class="navbar app-navbar navbar-expand-lg py-3" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="/index.html">
-                <div class="bg-cyan text-white rounded d-flex align-items-center justify-center p-1"
-                    style="width: 32px; height: 32px;">
-                    <i class="bi bi-hospital fs-6 ms-1"></i>
-                </div>
-                Phòng khám Nhẫn Tâm
-            </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <i class="bi bi-list fs-1 text-secondary"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-medium">
-                    <a href="/patient/booking.html" class="nav-link d-inline active">Đặt lịch khám</a>
-                    <a href="/patient/appointments.html" class="nav-link d-inline active">Lịch hẹn của tôi</a>
-                    <a href="profile.html" class="nav-link d-inline active">Hồ sơ sức khỏe</a>
-                    <a href="medical-history.html" class="nav-link d-inline active">Lịch sử khám</a>
-                </ul>
-                <div class="d-flex w-sm-100 w-lg-auto  gap-2" id="authNavArea">
-                    <a href="/patient/login.html"
-                        class="btn btn-light fw-medium text-dark border flex-fill w-lg-auto">Đăng nhập</a>
-                    <a href="/patient/login.html" class="btn btn-cyan fw-medium shadow-sm flex-fill w-lg-auto">Đặt lịch
-                        ngay</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div id="mainNavbar"></div>
+
 
     <div class="page-container">
         <div class="app-card">
@@ -91,7 +65,7 @@
                             <option value="B">B</option>
                             <option value="AB">AB</option>
                             <option value="O">O</option>
-                            <option value="Chưa rõ">Không rõ</option>
+                            <option value="Chưa rõ">Chưa rõ</option>
                         </select>
                     </div>
                     <div class="col-md-6">

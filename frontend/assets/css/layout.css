@@ -2,24 +2,22 @@
 .app-navbar {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: 0.9rem 1.5rem;
+  padding: 0.7rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.app-navbar .brand {
-  font-weight: 700;
+.navbar-brand {
+  font-weight: 600;
   font-size: 1.25rem;
-  color: var(--color-primary-dark);
+  color: var(--color-primary-dark) !important;
   text-decoration: none;
+  line-height: 1;
+  /* Triệt tiêu khoảng trống thừa của dòng text */
 }
 
-.app-navbar .brand::before {
-  content: "⚕";
-  margin-right: 0.4rem;
-  color: var(--color-primary);
-}
+
 
 .page-container {
   max-width: 960px;
@@ -74,6 +72,16 @@
   /* Hiện rõ nền mờ */
   transform: scale(1);
   /* Phóng về kích thước chuẩn ôm sát link */
+}
+
+#navbarNav .nav-link.active {
+  color: var(--color-primary-dark) !important;
+  font-weight: 500;
+}
+
+#navbarNav .nav-link.active::after {
+  opacity: 1;
+  transform: scale(1);
 }
 
 #mainNav {

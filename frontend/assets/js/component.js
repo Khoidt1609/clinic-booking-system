@@ -17,15 +17,15 @@ function renderSidebar() {
             items: [
                 { name: "Quản lý lịch khám", icon: "bi-calendar2-check", link: "dashboard.html" },
                 { name: "Hồ sơ bệnh nhân", icon: "bi-people", link: "patients.html" },
-                { name: "Lịch sử điều trị", icon: "bi-clock-history", link: "history.html" }
+                // { name: "Lịch sử điều trị", icon: "bi-clock-history", link: "history.html" }
             ]
         },
-        {
-            title: "Cá nhân",
-            items: [
-                { name: "Hồ sơ cá nhân", icon: "bi-person-badge", link: "profile.html" }
-            ]
-        }
+        // {
+        //     title: "Cá nhân",
+        //     items: [
+        //         { name: "Hồ sơ cá nhân", icon: "bi-person-badge", link: "profile.html" }
+        //     ]
+        // }
     ];
 
     const menuHtml = menuGroups.map(group => `
@@ -48,10 +48,11 @@ function renderSidebar() {
             <!-- Logo -->
             <div class="p-3 border-bottom">
                 <a class="d-flex align-items-center gap-2 fw-bold text-dark text-decoration-none fs-5" href="dashboard.html">
-                    <div class="bg-cyan text-white rounded-3 d-flex align-items-center justify-content-center p-1" style="width: 36px; height: 36px;">
-                        <i class="bi bi-hospital fs-5"></i>
+                    <div class=" d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <img src="../assets/images/logo-clinic-nobg.png" alt="logo clinic"
+                        class="img-fluid h-100 object-fit-contain">
                     </div>
-                    <span>Doctor Dashboard</span>
+                    <span>Bảng điều khiển</span>
                 </a>
             </div>
             

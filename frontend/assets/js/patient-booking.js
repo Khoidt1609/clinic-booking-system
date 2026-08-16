@@ -131,8 +131,32 @@ async function submitBooking() {
         showToast("Đặt lịch khám thành công!");
         // window.location.href = "appointments.html";
     } catch (error) {
-        errorBox.textContent = error.message;
-        errorBox.classList.remove("d-none");
+        const errorMessage = error.message || "";
+
+        // Kiểm tra xem chuỗi lỗi có chứa câu thông báo từ file Java của bạn không
+        const isSlotTaken = errorMessage.includes("Khung giờ này đã có người đặt") ||
+            errorMessage.includes("vui lòng chọn giờ khác");
+
+        if (isSlotTaken) {
+            showToast("Khung giờ này đã bị người khác đặt mất! Vui lòng chọn khung giờ khác.", "danger");
+
+            await loadSlots();
+
+            // Ẩn hộp thông tin tóm tắt cũ
+            const infoBox = document.getElementById("info");
+            if (infoBox) infoBox.classList.add("d-none");
+
+            // Cuộn mượt màn hình lên lại khu vực danh sách giờ (Bước 4)
+            const slotSection = document.getElementById("slotContainer");
+            if (slotSection) {
+                slotSection.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        } else {
+            // Các lỗi hệ thống khác
+            errorBox.textContent = errorMessage;
+            errorBox.classList.remove("d-none");
+            document.getElementById("confirmBtn").disabled = false;
+        }
     }
 }
 

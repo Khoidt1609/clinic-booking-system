@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     };
 
-
     await loadAppointmentInfo(appointmentId);
     if (currentAppointment) {
         await loadPatientProfile(currentAppointment.patientId);
@@ -194,10 +193,10 @@ function addMedicineRow(item = null) {
     tr.innerHTML = `
         <td class="ps-4 py-3">
             <input type="text" class="form-control form-control-sm med-name"
-                placeholder="Tên thuốc..." value="${item ? item.medicineName : ""}" required>
+                list="medicineList" oninput="filterMedicine(this)" placeholder="Tên thuốc..." value="${item ? item.medicineName : ""}" required>
         </td>
         <td class="py-3">
-            <input type="number" class="form-control form-control-sm med-quantity"
+            <input type="number"  class="form-control form-control-sm med-quantity"
                 placeholder="SL (Vd: 10 viên)" value="${item ? item.quantity : ""}" required>
         </td>
         <td class="py-3">

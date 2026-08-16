@@ -1,29 +1,7 @@
 //  xử lý Navbar cuộn
-document.addEventListener("DOMContentLoaded", function () {
-  const navbar = document.getElementById("mainNav");
-
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 20) {
-      navbar.classList.add("scrolled");
-    } else {
-      navbar.classList.remove("scrolled");
-    }
-  });
-
-});
-
-
-
-// LOGOUT
-function logout() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-
-  window.location.href = "/index.html"
-}
 
 document.addEventListener("DOMContentLoaded", () => {
-  const navbar = document.getElementById("mainNav");
+  const navbar = document.getElementById("mainNavbar");
 
   window.addEventListener("scroll", function () {
     if (window.scrollY > 20) {
@@ -32,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
       navbar.classList.remove("scrolled");
     }
   });
+
+  renderNavbar();
   // Chạy hàm hiển thị nav mới
   renderAuthNav();
 
@@ -46,6 +26,84 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 })
+
+const indexNavItems = [
+  { name: "Giới thiệu", link: "../index.html" },
+  { name: "Đặt Lịch", link: "/patient/booking.html" },
+  { name: "Dịch vụ", link: "/index.html#services" },
+  { name: "Liên hệ", link: "/index.html#contact" }
+];
+
+const patientNavItems = [
+  { name: "Đặt lịch khám", link: "booking.html" },
+  { name: "Lịch hẹn của tôi", link: "appointments.html" },
+  { name: "Hồ sơ sức khỏe", link: "profile.html" },
+  { name: "Lịch sử khám", link: "medical-history.html" }
+];
+
+function renderNavbar() {
+  const container = document.getElementById("mainNavbar");
+
+  if (!container) return;
+  //Lấy file html từ url 
+  const currentPath = window.location.pathname.split("/").pop() || "index.html";
+  let items = [];
+  if (currentPath == "index.html" || currentPath == "login.html" || currentPath == "register.html") {
+    items = indexNavItems;
+  } else {
+    items = patientNavItems;
+  }
+  console.log(items);
+  const item = items.map(item => {
+    const isActive = currentPath === item.link ? "active" : "";
+    return `
+                <li  class="nav-item">
+                  <a href="${item.link}" class="nav-link ${isActive}">
+                
+                          <span>${item.name}</span>
+                  </a>
+                </li>
+                `;
+  }).join("")
+
+
+  container.innerHTML = `
+      <nav class="navbar app-navbar navbar-expand-lg ">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 " href="/index.html">
+                <div class=" d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <img src="../assets/images/logo-clinic-nobg.png" alt="logo clinic"
+                        class="img-fluid h-100 object-fit-contain">
+                </div>
+                Phòng khám Nhẫn Tâm
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1 text-secondary"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-medium">
+                    ${item}
+                </ul>
+                <div class="d-flex w-sm-100 w-lg-auto  gap-2" id="authNavArea">
+                    <a href="/patient/login.html"
+                        class="btn btn-light fw-medium text-dark border flex-fill w-lg-auto">Đăng nhập</a>
+                    <a href="/patient/login.html" class="btn btn-cyan fw-medium shadow-sm flex-fill w-lg-auto">Đặt lịch
+                        ngay</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    `;
+};
+
+// LOGOUT
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  window.location.href = "/index.html"
+}
+
 
 
 

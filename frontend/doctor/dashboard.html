@@ -45,41 +45,35 @@
                 <!-- Thống kê nhanh -->
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
-                        <div
-                            class="card stat-card border-0 shadow-sm rounded-3 p-3 border-start border-4 border-primary bg-white">
-                            <div class="d-flex justify-content-between align-items-center">
+                        <div class="card stat-card border-0 shadow-sm rounded-3 p-3 bg-primary bg-opacity-10">
+                            <div class="d-flex justify-content-between align-items-center ">
                                 <div>
                                     <p class="text-muted small fw-semibold text-uppercase mb-1">Tổng ca khám</p>
                                     <h3 class="fw-bold mb-0 text-dark" id="statTotal">0</h3>
                                 </div>
-                                <div class="bg-primary bg-opacity-10 text-primary rounded p-3"><i
-                                        class="bi bi-people fs-3"></i></div>
+                                <div class=" text-primary p-3"><i class="bi bi-people fs-3"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div
-                            class="card stat-card border-0 shadow-sm rounded-3 p-3 border-start border-4 border-warning bg-white">
+                        <div class="card stat-card border-0 shadow-sm rounded-3 p-3 bg-warning bg-opacity-10 ">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="text-muted small fw-semibold text-uppercase mb-1">Đang chờ</p>
                                     <h3 class="fw-bold mb-0 text-dark" id="statWaiting">0</h3>
                                 </div>
-                                <div class="bg-warning bg-opacity-10 text-warning rounded p-3"><i
-                                        class="bi bi-hourglass-split fs-3"></i></div>
+                                <div class="text-warning rounded p-3"><i class="bi bi-hourglass-split fs-3"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div
-                            class="card stat-card border-0 shadow-sm rounded-3 p-3 border-start border-4 border-success bg-white">
+                        <div class="card stat-card border-0 shadow-sm rounded-3 p-3 bg-success bg-opacity-10 ">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="text-muted small fw-semibold text-uppercase mb-1">Đã khám xong</p>
                                     <h3 class="fw-bold mb-0 text-dark" id="statCompleted">0</h3>
                                 </div>
-                                <div class="bg-success bg-opacity-10 text-success rounded p-3"><i
-                                        class="bi bi-check-circle fs-3"></i></div>
+                                <div class="text-success rounded p-3"><i class="bi bi-check-circle fs-3"></i></div>
                             </div>
                         </div>
                     </div>
@@ -125,6 +119,8 @@
             </div>
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="/assets/js/api.js"></script>
     <script src="/assets/js/component.js"></script>
     <script src="/assets/js/doctor-dashboard.js"></script>

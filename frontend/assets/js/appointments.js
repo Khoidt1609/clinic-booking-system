@@ -32,7 +32,7 @@ function renderAppointments(appointments) {
 
     container.innerHTML = appointments.map(a => {
         const canCancel = a.status === "CONFIRMED";
-        const actionButton = (a.status !== "CANCELLED")
+        const actionButton = (a.status !== "CANCELLED" && a.status !== "COMPLETED")
             ? `<button class="btn btn-outline-danger btn-sm px-3 fw-medium" onclick="cancelAppointment(${a.appointmentId})"> 
                     <i class="bi bi-calendar-x me-1"></i> Hủy lịch hẹn 
                </button>`
@@ -43,7 +43,7 @@ function renderAppointments(appointments) {
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
                 <div class="d-flex align-items-start gap-3">
                     <div class="bg-info-subtle text-info rounded-3 p-3 d-flex align-items-center justify-content-center" style="width: 52px; height: 52px; flex-shrink: 0;">
-                        <i class="bi bi-person-fill fs-4 text-dark"></i>
+                        <i class="bi bi-person-fill fs-4 text-cyan"></i>
                     </div>
                     <div>
                         <div class="d-flex align-items-center gap-2 flex-wrap mb-1 text-dark">
