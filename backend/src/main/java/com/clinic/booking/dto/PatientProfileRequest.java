@@ -14,11 +14,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PatientProfileRequest {
-    @Pattern(regexp = "^(A|B|AB|O)[+-]?$", message = "Nhóm máu không hợp lệ (VD: A+, B-, O, AB...)")
+    @Pattern(regexp = "^(A|B|AB|O|Chưa rõ)[+-]?$", message = "Nhóm máu không hợp lệ (VD: A+, B-, O, AB...)")
     private String bloodType;
     
     @NotNull(message = "Ngày sinh không được để trống")
-    @Past(message = "Ngày sinh phải là một ngày trong quá khứ") // 🌟 Chặn chọn ngày tương lai
+    @Past(message = "Ngày sinh phải là một ngày trong quá khứ") // Chặn chọn ngày tương lai
     private LocalDate dateOfBirth;
     private Gender gender;
     private String address;
