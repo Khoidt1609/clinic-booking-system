@@ -30,11 +30,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadSlots();
 });
 
-async function loadSlots() {
+async function loadSlots(showLoading = true) {
     const date = document.getElementById("appointmentDate").value;
     const slotContainer = document.getElementById("slotContainer");
 
-    slotContainer.innerHTML = `<p class="text-muted"> Đang tải khung giờ...</p>`;
+    if (showLoading) {
+        slotContainer.innerHTML = `<p class="text-muted">Đang tải khung giờ...</p>`;
+    }
     selectedSlot = null;
     updateConfirmButtonState();
 
@@ -129,7 +131,9 @@ async function submitBooking() {
             }
         });
         showToast("Đặt lịch khám thành công!");
+        document.getElementById("symptoms").value = "";
         // window.location.href = "appointments.html";
+        await loadSlots(false);
     } catch (error) {
         const errorMessage = error.message || "";
 
@@ -140,13 +144,13 @@ async function submitBooking() {
         if (isSlotTaken) {
             showToast("Khung giờ này đã bị người khác đặt mất! Vui lòng chọn khung giờ khác.", "danger");
 
-            await loadSlots();
+            await loadSlots(false);
 
             // Ẩn hộp thông tin tóm tắt cũ
             const infoBox = document.getElementById("info");
             if (infoBox) infoBox.classList.add("d-none");
 
-            // Cuộn mượt màn hình lên lại khu vực danh sách giờ (Bước 4)
+            // Cuộn mượt màn hình lên lại khu vực danh sách giờ 
             const slotSection = document.getElementById("slotContainer");
             if (slotSection) {
                 slotSection.scrollIntoView({ behavior: "smooth", block: "center" });

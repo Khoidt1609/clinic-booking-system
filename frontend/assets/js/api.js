@@ -26,10 +26,17 @@ async function apiFetch(path, options = {}) {
 
     // Token hết hạn hoặc không hợp lệ  tự động đăng xuất, về lại trang login
     if (response.status == 401) {
-        showToast("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!", "warning");
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        window.location.href = "../patient/login.html"
+        if (path.includes("auth/login")) {
+
+            console.log("Sai tài khoản hoặc mật khẩu tại trang đăng nhập.");
+        } else {
+            // Nếu đang dùng ứng dụng ở trang khác mà bị 401 (hết hạn token thật) thì mới đá ra ngoài login
+            showToast("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!", "warning");
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            window.location.href = "../patient/login.html";
+            return; // Dừng hàm lại luôn
+        }
 
     }
 

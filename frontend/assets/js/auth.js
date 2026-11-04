@@ -1,5 +1,6 @@
 async function handleLogin(fromEvent) {
     fromEvent.preventDefault();
+
     const errorBox = document.getElementById("errorBox");
     errorBox.classList.add("d-none");
 
@@ -15,19 +16,23 @@ async function handleLogin(fromEvent) {
             }
         });
 
+        console.log(" API phản hồi thành công, dữ liệu nhận được:", response);
+
         saveSession(response);
+        console.log(" Đã chạy xong hàm saveSession");
 
         if (response.role == "DOCTOR") {
             showToast('Đăng nhập thành công với vai trò bác sĩ!');
+            console.log(" Chuyển hướng sang trang doctor dashboard sau 1.2s");
             setTimeout(() => window.location.href = "/doctor/dashboard.html", 1200);
-
-
         } else {
             showToast('Đăng nhập thành công!');
+            console.log(" Chuyển hướng sang trang index sau 1.2s");
             setTimeout(() => window.location.href = "/index.html", 1200);
         }
 
     } catch (error) {
+        console.error(" Lỗi bắt được trong khối CATCH:", error);
         errorBox.textContent = error.message;
         errorBox.classList.remove("d-none");
     }
