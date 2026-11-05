@@ -27,4 +27,5 @@ build/
 /booking/
 # === OS Files ===
 .DS_Store
-Thumbs.dbclinic_booking_db.sql
+Thumbs.db
+clinic_booking_db.sql
