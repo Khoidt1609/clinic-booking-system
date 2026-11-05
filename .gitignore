@@ -24,7 +24,7 @@ backend/.sts4-cache
 /nbdist/
 /.nb-gradle/
 build/
-booking/
+/booking/
 # === OS Files ===
 .DS_Store
-Thumbs.db
+Thumbs.dbclinic_booking_db.sql
